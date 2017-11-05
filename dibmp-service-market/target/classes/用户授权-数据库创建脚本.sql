@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS memberdb;
-CREATE DATABASE memberdb CHARACTER SET UTF8 ;
-USE memberdb ;
+DROP DATABASE IF EXISTS warehouse;
+CREATE DATABASE warehouse CHARACTER SET UTF8 ;
+USE warehouse ;
 CREATE TABLE member(
    mid                  varchar(50) not null,
    name                 varchar(30),
