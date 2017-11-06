@@ -4,14 +4,20 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Action implements Serializable {
-	private String actid ;
-	private String title ;
-	private String rid ;
+	public String actid;
+	public String rid;
+	public String title;
 	public String getActid() {
 		return actid;
 	}
 	public void setActid(String actid) {
 		this.actid = actid;
+	}
+	public String getRid() {
+		return rid;
+	}
+	public void setRid(String rid) {
+		this.rid = rid;
 	}
 	public String getTitle() {
 		return title;
@@ -19,10 +25,8 @@ public class Action implements Serializable {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getRid() {
-		return rid;
+	@Override
+	public String toString() {
+		return "Action [actid=" + actid + ", rid=" + rid + ", title=" + title + "]";
 	}
-	public void setRid(String rid) {
-		this.rid = rid;
-	} 
 }

@@ -4,8 +4,8 @@ public class Warehouse {
 	private Long wid;
 	private String name ;
 	private Long pid;
-	private Long cid;  //gggg
-	private Long wiid;//fff
+	private Long cid;
+	private Long wiid;
 	private String address;
 	private Double area;
 	private Integer maximum;

@@ -39,4 +39,9 @@ public class Dept implements Serializable {
 	public void setCurrnum(Integer currnum) {
 		this.currnum = currnum;
 	}
+	@Override
+	public String toString() {
+		return "Dept [did=" + did + ", dname=" + dname + ", mid=" + mid + ", maxnum=" + maxnum + ", currnum=" + currnum
+				+ "]";
+	}
 }
