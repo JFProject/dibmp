@@ -14,7 +14,7 @@
 	String column = (String) request.getAttribute("column") ;
 %>
 <div id="searchPageDiv" class="text-center">
-	<form action="${basePath2}${handleUrl}" method="post" class="form-group">
+	<form action="${basePath}${handleUrl}" method="post" class="form-group">
 <%
 	if (!(columnData == null || "".equals(columnData))) {
 %>

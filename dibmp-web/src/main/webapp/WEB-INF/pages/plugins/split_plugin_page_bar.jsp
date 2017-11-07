@@ -21,7 +21,7 @@
 	long allPages = 1 ;
 	int lineSize = 5 ;
 	try {
-		handleUrl = application.getAttribute("basePath2").toString() +  request.getAttribute("handleUrl") ;
+		handleUrl = request.getAttribute("basePath").toString() +  request.getAttribute("handleUrl").toString() ;
 	} catch (Exception e) {}
 	try {
 		currentPage = (Long) request.getAttribute("currentPage") ;
