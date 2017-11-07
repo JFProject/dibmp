@@ -1,5 +1,8 @@
 package cn.mldn.dibmp.web.action.back;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.mldn.dibmp.service.IGoodsServiceBack;
 import cn.mldn.dibmp.vo.Goods;
+import cn.mldn.dibmp.vo.Witem;
 import cn.mldn.fastdfs.util.FastDFSUtil;
 import cn.mldn.util.action.abs.AbstractAction;
 import cn.mldn.util.web.SplitPageUtil;
@@ -30,7 +34,6 @@ public class GoodsActionBack extends AbstractAction {
 	public ModelAndView add(Goods goods,MultipartFile pic) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
 		String photo = FastDFSUtil.upload(pic) ;
-		System.err.println(photo + "   ****************" );
 		goods.setPhoto(photo);
 		goods.setRecorder((String)super.getRequest().getSession().getAttribute("mid"));
 		goods.setDelflag(1);
@@ -47,8 +50,15 @@ public class GoodsActionBack extends AbstractAction {
 		return mav;
 	}
 	@RequestMapping("edit_pre")
-	public ModelAndView editPre() { 
+	public ModelAndView editPre(Long gid) { 
 		ModelAndView mav = new ModelAndView(super.getPage("goods.edit.page"));
+		Goods goods = (Goods)(this.goodsService.editPre(gid).get("goods")) ;
+		List<Witem> allWitem = (List<Witem>)(this.goodsService.editPre(gid).get("allWitem")) ;
+		String title = (String)(this.goodsService.editPre(gid).get("title")) ;
+		goods.setPhoto(FastDFSUtil.getPhotoPath(goods.getPhoto()));
+		mav.addObject("goods", goods) ;
+		mav.addObject("allWitem", allWitem) ;
+		mav.addObject("title", title) ;
 		return mav;
 	} 
 	@RequestMapping("edit")
