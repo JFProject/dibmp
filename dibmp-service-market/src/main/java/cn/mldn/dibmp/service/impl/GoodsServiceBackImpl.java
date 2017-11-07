@@ -56,5 +56,15 @@ public class GoodsServiceBackImpl extends AbstractService implements IGoodsServi
 		map.put("memberName", memberName) ;
 		return map ;
 	}
+	
+	@Override
+	public Map<String, Object> editPre(long gid) {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		Goods goods = this.goodsDAO.findByGid(gid) ;
+		map.put("goods", goods) ;
+		map.put("allWitem", this.goodsDAO.findAllWitem()) ;
+		map.put("title", this.goodsDAO.findTitleByStid(goods.getStid())) ;
+		return map;
+	}
 
 }

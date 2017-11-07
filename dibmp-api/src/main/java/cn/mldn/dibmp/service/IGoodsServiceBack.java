@@ -26,6 +26,15 @@ public interface IGoodsServiceBack {
 	 */
 	public boolean add(Goods goods) ;
 	/**
+	 * 编辑前的回显操作
+	 * @param gid 商品编号
+	 * @return 以map形式返回
+	 * 1、key = goods，value = 商品信息
+	 * 2、key = allWitem，value = 所有商品分类
+	 * 3、key = title，value = 子分类名称
+	 */
+	public Map<String,Object> editPre(long gid) ;
+	/**
 	 * 商品清单分页模糊显示
 	 * @param currentPage 当前页
 	 * @param lineSize 每页的行数

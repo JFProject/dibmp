@@ -39,4 +39,12 @@
 		SELECT name FROM member WHERE mid=#{mid}
 	</select>
 	
+	<select id="findTitleByStid" parameterType="long" resultType="String">
+		SELECT title FROM subtype WHERE stid=#{stid}
+	</select>
+	
+	<select id="findByGid" parameterType="long" resultType="Goods">
+		SELECT gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag
+		FROM goods WHERE gid=#{gid}
+	</select>
 </mapper>

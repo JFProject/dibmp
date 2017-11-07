@@ -24,6 +24,7 @@ $(function(){
 			},"json") ;
 		}) ;
 	}) ;
+	
 })
 
 function splitGet(data){

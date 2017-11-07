@@ -20,4 +20,11 @@ public interface IGoodsDAO {
 	 * @return 记录者姓名
 	 */
 	public String findNameByMid(String mid) ;
+	/**
+	 * 根据商品子分类编号查找商品子分类名称
+	 * @param stid 子分类编号
+	 * @return 子分类名称
+	 */
+	public String findTitleByStid(Long stid) ;
+	public Goods findByGid(Long gid) ;
 }
