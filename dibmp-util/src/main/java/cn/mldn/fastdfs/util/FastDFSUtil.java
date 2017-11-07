@@ -34,8 +34,9 @@ public class FastDFSUtil {
 	}
 	public static String getPhotoPath(String photo) {
 		try {
-			ClassPathResource classPathResource = new ClassPathResource("fastdfs.properties");
-			ClientGlobal.init(classPathResource.getClassLoader().getResource("fastdfs.properties").getPath());
+			ClassPathResource classPathResource = new ClassPathResource("config/fastdfs.properties") ;
+			String url = classPathResource.getURI().toString() ;
+			ClientGlobal.init(url.replaceAll("file:",""));
 			TrackerClient trackerClient = new TrackerClient();
 			TrackerServer trackerServer = trackerClient.getConnection();
 			String temp[] = photo.split("/",2) ;
@@ -47,7 +48,6 @@ public class FastDFSUtil {
 			accessUrl.append("/" + temp[0] + "/").append(fileUrl);
 			accessUrl.append("?token=").append(ProtoCommon.getToken(fileUrl, ts, ClientGlobal.g_secret_key));
 			accessUrl.append("&ts=").append(ts);
-			System.out.println(accessUrl);
 			trackerServer.close();
 			return accessUrl.toString() ;
 		}catch(Exception e) {
