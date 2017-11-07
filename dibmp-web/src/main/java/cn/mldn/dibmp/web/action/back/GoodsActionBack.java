@@ -48,7 +48,7 @@ public class GoodsActionBack extends AbstractAction {
 	public ModelAndView show() { 
 		ModelAndView mav = new ModelAndView(super.getPage("goods.show.page"));
 		return mav;
-	}
+	} 
 	@RequestMapping("edit_pre")
 	public ModelAndView editPre(Long gid) { 
 		ModelAndView mav = new ModelAndView(super.getPage("goods.edit.page"));
