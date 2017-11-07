@@ -31,31 +31,33 @@
 					<thead>
 						<tr>
 							<th class="text-left" style="width:10%;">商品编号</th> 
-							<th class="text-left" style="width:30%;">商品名称</th> 
+							<th class="text-left" style="width:25%;">商品名称</th> 
 							<th class="text-center" style="width:10%;">单价（￥）</th>
 							<th class="text-center" style="width:10%;">重量（g）</th>
 							<th class="text-center" style="width:10%;">最近入库日期</th>
 							<th class="text-center" style="width:10%;">库存量</th>
 							<th class="text-center" style="width:10%;">录入员工</th>
-							<th class="text-left" style="width:20%;">操作</th>
+							<th class="text-left" style="width:25%;">操作</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="text-left">100001</td>
-							<td class="text-left"><a href="<%=GOODS_SHOW_URL%>" title="查看商品详情">胡友牌化粪池</a></td>
-							<td class="text-center">4456</td>
-							<td class="text-center">200g</td>
-							<td class="text-center">2018-10-13</td>
-							<td class="text-center"><span id="storage-1" style="cursor:pointer;">3000</span></td>
-							<td class="text-center"><span id="mid-admin" style="cursor:pointer;">老李</span></td> 
-							<td class="text-left">
-								<a href="<%=GOODS_EDIT_URL%>" class="btn btn-primary btn-xs">
-										<span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</a>
-								<button class="btn btn-danger btn-xs" id="out-1">
-										<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;待出库</button>
-							</td>
-						</tr>
+						<c:forEach items="${ allGoods}" var="goods">
+							<tr>
+								<td class="text-left">${goods.gid }</td>
+								<td class="text-left"><a href="<%=GOODS_SHOW_URL%>" title="查看商品详情">${goods.name }</a></td>
+								<td class="text-center">${goods.price } ￥</td>
+								<td class="text-center">${goods.weight} g</td>
+								<td class="text-center">${goods.lastin }</td>
+								<td class="text-center"><span id="storage-${goods.gid }" style="cursor:pointer;">${goods.stornum }</span></td>
+								<td class="text-center"><span id="mid-${goods.recorder }" style="cursor:pointer;">${memberName[goods.recorder] }</span></td> 
+								<td class="text-left">
+									<a href="<%=GOODS_EDIT_URL%>" class="btn btn-primary btn-xs">
+											<span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</a>
+									<button class="btn btn-danger btn-xs" id="out-${goods.gid }">
+											<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;待出库</button>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div id="splitBarDiv" style="float:right">

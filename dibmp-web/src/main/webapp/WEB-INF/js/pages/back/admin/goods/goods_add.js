@@ -27,7 +27,7 @@ $(function(){
 			"name" : {
 				required : true
 			} ,
-			"tid" : {
+			"wiid" : {
 				required : true 
 			},
 			"stid" : {
@@ -50,4 +50,19 @@ $(function(){
 			}
 		}
 	});
+	$("#wiid").on("change",function(){
+		wiid = $(this).val() ;
+		if(wiid != ""){
+			$.post("pages/back/admin/goods/getSubtypeByWiid.action",{"wiid":wiid},function(data){
+				$("#stid").empty() ;
+				for(var i = 0 ; i < data.length ; i++) {
+					temp = data[i] ;
+					$("#stid").append("<option value=" + temp.stid + ">" + temp.title + "</option>") ;
+				}
+			},"json");
+		}else{
+			$("#stid").empty() ;
+			$("#stid").append("<option value=''>====== 请选择商品所属子分类 ======</option>") ;
+		}
+	})
 })

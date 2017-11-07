@@ -21,4 +21,13 @@ public interface IMemberService {
 	 * 2、key = allActions、value = 该用户具备的所有权限
 	 */
 	public Map<String,Set<String>> getRoleAndActionByMember(String mid) ;
+	/**
+	 * 根据mid取得member信息，同时取得对应的职位以及部门名称
+	 * @param mid 雇员ID
+	 * @return 以map的形式返回
+	 * 1、key = member，value = 雇员信息
+	 * 2、key = title，value = 雇员等级名称
+	 * 3、key = title，value = 雇员部门名称
+	 */
+	public Map<String,Object> getMemberAndTitleAndDname(String mid) ;
 }

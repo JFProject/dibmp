@@ -5,4 +5,10 @@
 	<select id="findById" parameterType="String" resultType="Member">
 		SELECT mid,lid,did,name,salary,phone,password,photo,note,hiredate,inmid,locked FROM member WHERE mid=#{mid}
 	</select>
+	<select id="findTitleByLid" parameterType="long" resultType="String">
+		select title from level where lid=#{lid}
+	</select>
+	<select id="findDnameByDid" parameterType="long" resultType="String">
+		select dname from dept where did=#{did}
+	</select>
 </mapper>

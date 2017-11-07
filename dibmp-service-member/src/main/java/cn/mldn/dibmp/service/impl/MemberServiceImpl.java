@@ -34,4 +34,16 @@ public class MemberServiceImpl implements IMemberService {
 		return map;
 	}
 
+	@Override
+	public Map<String, Object> getMemberAndTitleAndDname(String mid) {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		Member member = this.memberDAO.findById(mid) ;
+		String title = this.memberDAO.findTitleByLid(member.getLid()) ;
+		String dname = this.memberDAO.findDnameByDid(member.getDid()) ;
+		map.put("member", member) ;
+		map.put("title", title) ;
+		map.put("dname", dname) ;
+		return map;
+	}
+
 }
