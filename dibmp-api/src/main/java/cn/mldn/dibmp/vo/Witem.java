@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Witem implements Serializable {
-	public Long wiid;
-	public String title;
+	private Long wiid;
+	private String title;
 	public Long getWiid() {
 		return wiid;
 	}

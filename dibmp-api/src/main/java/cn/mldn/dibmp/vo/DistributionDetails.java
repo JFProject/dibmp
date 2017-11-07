@@ -3,15 +3,15 @@ package cn.mldn.dibmp.vo;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Distribution_details implements Serializable {
-	public Long dsdid;
-	public Long gid;
-	public String name;
-	public Integer num;
-	public Double price;
-	public Integer status;
-	public Long wid;
-	public String outmid;
+public class DistributionDetails implements Serializable {
+	private Long dsdid;
+	private Long gid;
+	private String name;
+	private Integer num;
+	private Double price;
+	private Integer status;
+	private Long wid;
+	private String outmid;
 	public Long getDsdid() {
 		return dsdid;
 	}

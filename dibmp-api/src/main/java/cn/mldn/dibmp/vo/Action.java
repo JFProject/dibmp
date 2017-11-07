@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Action implements Serializable {
-	public String actid;
-	public String rid;
-	public String title;
+	private String actid;
+	private String rid;
+	private String title;
 	public String getActid() {
 		return actid;
 	}

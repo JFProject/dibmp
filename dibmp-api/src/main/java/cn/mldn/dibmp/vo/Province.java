@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Province implements Serializable {
-	public Long pid;
-	public String title;
+	private Long pid;
+	private String title;
 	public Long getPid() {
 		return pid;
 	}

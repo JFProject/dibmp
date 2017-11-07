@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class City implements Serializable {
-	public Long cid;
-	public Long pid;
-	public String title;
+	private Long cid;
+	private Long pid;
+	private String title;
 	public Long getCid() {
 		return cid;
 	}

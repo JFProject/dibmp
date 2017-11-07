@@ -3,9 +3,9 @@ package cn.mldn.dibmp.vo;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Dept_role implements Serializable {
-	public Long did;
-	public String rid;
+public class DeptRole implements Serializable {
+	private Long did;
+	private String rid;
 	public Long getDid() {
 		return did;
 	}

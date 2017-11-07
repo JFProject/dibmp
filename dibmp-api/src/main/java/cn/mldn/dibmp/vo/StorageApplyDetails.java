@@ -3,13 +3,13 @@ package cn.mldn.dibmp.vo;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Storage_apply_details implements Serializable {
-	public Long sadid;
-	public Long gid;
-	public String name;
-	public Integer num;
-	public Double price;
-	public Double weight;
+public class StorageApplyDetails implements Serializable {
+	private Long sadid;
+	private Long gid;
+	private String name;
+	private Integer num;
+	private Double price;
+	private Double weight;
 	public Long getSadid() {
 		return sadid;
 	}

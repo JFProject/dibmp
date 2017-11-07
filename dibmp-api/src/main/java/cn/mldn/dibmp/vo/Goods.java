@@ -5,18 +5,18 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Goods implements Serializable {
-	public Long gid;
-	public String name;
-	public Long wiid;
-	public Long stid;
-	public Double price;
-	public Double weight;
-	public String photo;
-	public String note;
-	public Date lastin;
-	public Integer stornum;
-	public String recorder;
-	public Integer delflag;
+	private Long gid;
+	private String name;
+	private Long wiid;
+	private Long stid;
+	private Double price;
+	private Double weight;
+	private String photo;
+	private String note;
+	private Date lastin;
+	private Integer stornum;
+	private String recorder;
+	private Integer delflag;
 	public Long getGid() {
 		return gid;
 	}

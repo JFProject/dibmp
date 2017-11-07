@@ -4,14 +4,14 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Distribution implements Serializable {
-	public Long dsid;
-	public String title;
-	public Long pid;
-	public Long cid;
-	public Integer gnum;
-	public Double price;
-	public Integer status;
-	public String note;
+	private Long dsid;
+	private String title;
+	private Long pid;
+	private Long cid;
+	private Integer gnum;
+	private Double price;
+	private Integer status;
+	private String note;
 	public Long getDsid() {
 		return dsid;
 	}
