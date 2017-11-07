@@ -11,6 +11,7 @@ public interface IGoodsDAO {
 	public List<Witem> findAllWitem() ;
 	public List<Subtype> findSubtypeByWiid(Long wiid) ;
 	public boolean doCreate(Goods goods) ;
+	public boolean doEdit(Goods goods) ;
 	public Goods findByGname(String Gname) ;
 	public List<Goods> findSplitOrderByGid(Map<String,Object> params) ;
 	public Long getSplitCount(Map<String,Object> params) ;
@@ -27,4 +28,5 @@ public interface IGoodsDAO {
 	 */
 	public String findTitleByStid(Long stid) ;
 	public Goods findByGid(Long gid) ;
+	public Goods findByName(String name) ;
 }

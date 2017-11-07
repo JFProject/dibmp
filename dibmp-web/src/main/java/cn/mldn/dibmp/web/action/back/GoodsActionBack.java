@@ -1,6 +1,5 @@
 package cn.mldn.dibmp.web.action.back;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import cn.mldn.dibmp.service.IGoodsServiceBack;
 import cn.mldn.dibmp.vo.Goods;
-import cn.mldn.dibmp.vo.Witem;
 import cn.mldn.fastdfs.util.FastDFSUtil;
 import cn.mldn.util.action.abs.AbstractAction;
 import cn.mldn.util.web.SplitPageUtil;
@@ -38,33 +36,48 @@ public class GoodsActionBack extends AbstractAction {
 		goods.setRecorder((String)super.getRequest().getSession().getAttribute("mid"));
 		goods.setDelflag(1);
 		if(this.goodsService.add(goods)) {
-			super.setMsgAndUrl(mav, "goods.add.action", "vo.add.success", TITLE);
+			super.setMsgAndUrl(mav, "goods.list.action", "vo.add.success", TITLE);
 		}else {
-			super.setMsgAndUrl(mav, "goods.add.action", "vo.add.failure", TITLE);
+			super.setMsgAndUrl(mav, "goods.list.action", "vo.add.failure", TITLE);
 		}
 		return mav;
 	} 
 	@RequestMapping("show") 
-	public ModelAndView show() { 
+	public ModelAndView show(long gid) { 
 		ModelAndView mav = new ModelAndView(super.getPage("goods.show.page"));
+		Map<String,Object> map = this.goodsService.show(gid) ;
+		Goods goods = (Goods)map.get("goods") ;
+		String authPhoto = FastDFSUtil.getPhotoPath(goods.getPhoto()) ;
+		mav.addObject("goods", goods) ;
+		mav.addObject("authPhoto", authPhoto) ;
 		return mav;
 	} 
 	@RequestMapping("edit_pre")   
 	public ModelAndView editPre(Long gid) { 
 		ModelAndView mav = new ModelAndView(super.getPage("goods.edit.page"));
-		Goods goods = (Goods)(this.goodsService.editPre(gid).get("goods")) ;
-		List<Witem> allWitem = (List<Witem>)(this.goodsService.editPre(gid).get("allWitem")) ;
-		String title = (String)(this.goodsService.editPre(gid).get("title")) ;
-		goods.setPhoto(FastDFSUtil.getPhotoPath(goods.getPhoto()));
+		Map<String,Object> map = this.goodsService.editPre(gid) ;
+		Goods goods = (Goods)map.get("goods") ;
+		String authPhoto = FastDFSUtil.getPhotoPath(goods.getPhoto());
 		mav.addObject("goods", goods) ;
-		mav.addObject("allWitem", allWitem) ;
-		mav.addObject("title", title) ;
+		mav.addObject("allWitem", map.get("allWitem")) ;
+		mav.addObject("allSubtype", map.get("allSubtype")) ;
+		mav.addObject("authPhoto", authPhoto) ;
 		return mav;
 	} 
 	@RequestMapping("edit")
-	public ModelAndView edit() {
+	public ModelAndView edit(Goods goods,MultipartFile pic) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
-		super.setMsgAndUrl(mav, "goods.list.action", "vo.edit.success", TITLE);
+		if(pic.getSize() != 0) {
+			String photo = FastDFSUtil.upload(pic) ;
+			goods.setPhoto(photo);
+		}
+		goods.setRecorder((String)super.getRequest().getSession().getAttribute("mid"));
+		goods.setDelflag(1);
+		if(this.goodsService.edit(goods)) {
+			super.setMsgAndUrl(mav, "goods.list.action", "vo.edit.success", TITLE);
+		}else {
+			super.setMsgAndUrl(mav, "goods.list.action", "vo.edit.failure", TITLE);
+		}
 		return mav;
 	}
 	@RequestMapping("list") 

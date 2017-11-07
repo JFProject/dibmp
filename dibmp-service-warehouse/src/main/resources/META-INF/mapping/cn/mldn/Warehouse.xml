@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mldn.dibmp.dao.IWaerhousDAO">
+	<insert id="doCreate" parameterType="Warehouse" >
+		INSERT INTO warehouse(name,pid,cid,wiid,address,area,maximum,photo,note)
+		VALUES (#{name},#{pid},#{cid},#{wiid},#{address},#{area},#{maximum},#{photo},#{note}) ;
+	</insert>
+	<select id="findSplit" resultType="Warehouse" parameterType="map">
+		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin 
+		from warehouse 
+		<where>
+			<if test="column != null and keyWord != null">
+				${column} LIKE #{keyWord}
+			</if>
+		</where>
+		LIMIT #{start},#{lineSize}
+	</select> 
+	<select id="getSplitCount" parameterType="map" resultType="long">
+		select count(*) from warehouse 
+		<where>
+			<if test="column != null and keyWord != null">
+				${column} LIKE #{keyWord}
+			</if>
+		</where>
+	</select>
+</mapper>

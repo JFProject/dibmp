@@ -63,7 +63,20 @@ public class GoodsServiceBackImpl extends AbstractService implements IGoodsServi
 		Goods goods = this.goodsDAO.findByGid(gid) ;
 		map.put("goods", goods) ;
 		map.put("allWitem", this.goodsDAO.findAllWitem()) ;
-		map.put("title", this.goodsDAO.findTitleByStid(goods.getStid())) ;
+		map.put("allSubtype", this.goodsDAO.findSubtypeByWiid(goods.getWiid())) ;
+		return map;
+	}
+
+	@Override
+	public boolean edit(Goods goods) {
+		return this.goodsDAO.doEdit(goods);
+	}
+
+	@Override
+	public Map<String, Object> show(long gid) {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		Goods goods = this.goodsDAO.findByGid(gid) ;
+		map.put("goods", goods) ;
 		return map;
 	}
 

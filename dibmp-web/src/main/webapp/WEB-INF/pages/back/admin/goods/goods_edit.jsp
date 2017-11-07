@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/pages/plugins/back/back_header.jsp"/>
 <%!
-	public static final String GOODS_EDIT_URL = "" ;
+	public static final String GOODS_EDIT_URL = "pages/back/admin/goods/edit.action" ;
 %>
 <script type="text/javascript" src="js/pages/back/admin/goods/goods_edit.js"></script>
 <body class="hold-transition skin-blue sidebar-mini"> 
@@ -41,13 +41,12 @@
 								<label class="col-md-3 control-label" for="wiid">商品分类：</label>
 								<div class="col-md-5">
 									<select id="wiid" name="wiid" class="form-control">
-										<option value="">====== 请选择商品所属分类 ======</option>
 										<c:forEach items="${allWitem }" var="witem">
 											<c:if test="${goods.wiid == witem.wiid }">
-												<option value="${witem.wiid} }" selected>${witem.title }</option>
+												<option value="${witem.wiid }" selected>${witem.title }</option>
 											</c:if>
 											<c:if test="${goods.wiid != witem.wiid }">
-												<option value="${witem.wiid} }">${witem.title }</option>
+												<option value="${witem.wiid }">${witem.title }</option>
 											</c:if>
 										</c:forEach>
 									</select>
@@ -60,8 +59,14 @@
 								<label class="col-md-3 control-label" for="stid">商品子分类：</label>
 								<div class="col-md-5">
 									<select id="stid" name="stid" class="form-control">
-										<option value="">====== 请选择商品所属子分类 ======</option>
-										<option value="${goods.stid} }" selected>${title }</option>
+										<c:forEach items="${allSubtype }" var="subtype">
+											<c:if test="${goods.stid == subtype.stid }">
+												<option value="${subtype.stid }" selected>${subtype.title }</option>
+											</c:if>
+											<c:if test="${goods.stid != subtype.stid }">
+												<option value="${subtype.stid }">${subtype.title }</option>
+											</c:if>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -92,7 +97,7 @@
 								<!-- 定义表单提示文字 -->
 								<label class="col-md-3 control-label" for="pic">商品图片：</label>
 								<div class="col-md-5">
-									<img src="${goods.photo }">
+									<img src="${authPhoto }">
 									<!-- 定义表单输入组件 -->
 									<input type="file" id="pic" name="pic" class="form-control"
 										placeholder="请上传商品照片">
@@ -114,6 +119,8 @@
 							</div> 
 							<div class="form-group">
 								<div class="col-md-5 col-md-offset-3">
+									<input type="hidden" name="gid" value="${goods.gid }">
+									<input type="hidden" name="photo" value="${goods.photo }">
 									<button type="submit" class="btn btn-primary">修改</button>
 									<button type="reset" class="btn btn-warning">重置</button>
 								</div>

@@ -1,6 +1,9 @@
 package cn.mldn.dibmp.vo;
 
-public class Warehouse {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Warehouse implements Serializable{
 	private Long wid;
 	private String name ;
 	private Long pid;
