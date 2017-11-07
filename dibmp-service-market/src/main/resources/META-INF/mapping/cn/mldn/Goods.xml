@@ -51,4 +51,9 @@
 		SELECT gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag
 		FROM goods WHERE gid=#{gid}
 	</select>
+	
+	<select id="findByName" parameterType="String" resultType="Goods">
+		SELECT gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag
+		FROM goods WHERE name=#{name}
+	</select>
 </mapper>

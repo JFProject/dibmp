@@ -52,4 +52,11 @@ public interface IGoodsServiceBack {
 	 * @return 修改成功返回true
 	 */
 	public boolean edit(Goods goods) ;
+	/**
+	 * 进行商品的详细显示
+	 * @param gid 商品的id
+	 * @return 以map形式返回
+	 * 1、key = goods，value = 商品信息
+	 */
+	public Map<String,Object> show(long gid) ;
 }

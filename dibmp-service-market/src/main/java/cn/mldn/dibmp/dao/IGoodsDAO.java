@@ -28,4 +28,5 @@ public interface IGoodsDAO {
 	 */
 	public String findTitleByStid(Long stid) ;
 	public Goods findByGid(Long gid) ;
+	public Goods findByName(String name) ;
 }

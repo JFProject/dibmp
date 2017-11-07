@@ -72,7 +72,7 @@
 <%
 			}
 		}
-		if ((currentPage + seed + 1) < allPages) {
+		if ((currentPage + seed - 1) < allPages) {
 %>
 			<li class="disabled"><span>...</span></li>
 <%

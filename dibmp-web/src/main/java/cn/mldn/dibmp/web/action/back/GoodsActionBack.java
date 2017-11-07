@@ -43,8 +43,13 @@ public class GoodsActionBack extends AbstractAction {
 		return mav;
 	} 
 	@RequestMapping("show") 
-	public ModelAndView show() { 
+	public ModelAndView show(long gid) { 
 		ModelAndView mav = new ModelAndView(super.getPage("goods.show.page"));
+		Map<String,Object> map = this.goodsService.show(gid) ;
+		Goods goods = (Goods)map.get("goods") ;
+		String authPhoto = FastDFSUtil.getPhotoPath(goods.getPhoto()) ;
+		mav.addObject("goods", goods) ;
+		mav.addObject("authPhoto", authPhoto) ;
 		return mav;
 	} 
 	@RequestMapping("edit_pre")   

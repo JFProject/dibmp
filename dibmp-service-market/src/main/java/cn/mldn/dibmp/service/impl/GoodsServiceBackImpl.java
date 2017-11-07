@@ -72,4 +72,12 @@ public class GoodsServiceBackImpl extends AbstractService implements IGoodsServi
 		return this.goodsDAO.doEdit(goods);
 	}
 
+	@Override
+	public Map<String, Object> show(long gid) {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		Goods goods = this.goodsDAO.findByGid(gid) ;
+		map.put("goods", goods) ;
+		return map;
+	}
+
 }
