@@ -15,6 +15,10 @@
 		insert into Goods(name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag)
 		values(#{name},#{wiid},#{stid},#{price},#{weight},#{photo},#{note},#{lastin},#{stornum},#{recorder},#{delflag}) 
 	</insert>
+	
+	<update id="doEdit" parameterType="Goods">
+		update Goods set name=#{name},wiid=#{wiid},stid=#{stid},price=#{price},weight=#{weight},photo=#{photo},note=#{note},lastin=#{lastin},stornum=#{stornum},recorder=#{recorder},delflag=#{delflag} where gid=#{gid}
+	</update>
 
 	<select id="findByGname" parameterType="String" resultType="Goods">
 		SELECT gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag

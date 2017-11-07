@@ -39,7 +39,7 @@ $(function(){
 			},
 			"weight" : {
 				required : true ,
-				digits : true 
+				number : true 
 			},
 			"pic" : {
 				required : true ,
