@@ -5,18 +5,18 @@ import java.util.Date;
 
 @SuppressWarnings("serial")
 public class Customer implements Serializable {
-	public Long cuid;
-	public String name;
-	public String photo;
-	public Long pid;
-	public Long cid;
-	public String address;
-	public Date indate;
-	public Integer connum;
-	public Long ciid;
-	public Long csid;
-	public String note;
-	public String recorder;
+	private Long cuid;
+	private String name;
+	private String photo;
+	private Long pid;
+	private Long cid;
+	private String address;
+	private Date indate;
+	private Integer connum;
+	private Long ciid;
+	private Long csid;
+	private String note;
+	private String recorder;
 	public Long getCuid() {
 		return cuid;
 	}

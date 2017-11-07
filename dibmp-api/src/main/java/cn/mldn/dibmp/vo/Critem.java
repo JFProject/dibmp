@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Critem implements Serializable {
-	public Long criid;
-	public String title;
+	private Long criid;
+	private String title;
 	public Long getCriid() {
 		return criid;
 	}

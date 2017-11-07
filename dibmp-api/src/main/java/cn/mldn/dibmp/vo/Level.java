@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Level implements Serializable {
-	public Integer lid;
-	public String title;
-	public Double losal;
-	public Double hisal;
+	private Integer lid;
+	private String title;
+	private Double losal;
+	private Double hisal;
 	public Integer getLid() {
 		return lid;
 	}

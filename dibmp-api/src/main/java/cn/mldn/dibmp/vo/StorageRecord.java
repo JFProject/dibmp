@@ -3,16 +3,16 @@ package cn.mldn.dibmp.vo;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Storage_record implements Serializable {
-	public Long srid;
-	public Long said;
-	public Long gid;
-	public String name;
-	public Integer num;
-	public Double price;
-	public Double weight;
-	public Integer status;
-	public String inmid;
+public class StorageRecord implements Serializable {
+	private Long srid;
+	private Long said;
+	private Long gid;
+	private String name;
+	private Integer num;
+	private Double price;
+	private Double weight;
+	private Integer status;
+	private String inmid;
 	public Long getSrid() {
 		return srid;
 	}

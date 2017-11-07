@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Csource implements Serializable {
-	public  Long csid;
-	public String title;
+	private  Long csid;
+	private String title;
 	public Long getCsid() {
 		return csid;
 	}

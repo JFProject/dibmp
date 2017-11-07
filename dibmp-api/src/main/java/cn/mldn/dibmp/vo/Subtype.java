@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Subtype implements Serializable {
-	public Long stid;
-	public String title;
-	public Long wiid;
+	private Long stid;
+	private String title;
+	private Long wiid;
 	public Long getStid() {
 		return stid;
 	}

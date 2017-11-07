@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class Citem implements Serializable {
-	public Long ciid;
-	public String title;
+	private Long ciid;
+	private String title;
 	public Long getCiid() {
 		return ciid;
 	}

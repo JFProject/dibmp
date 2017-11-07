@@ -3,16 +3,16 @@ package cn.mldn.dibmp.vo;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-class Storage_apply implements Serializable {
-	public Long said;
-	public String title;
-	public Long pid;
-	public Long cid;
-	public Long wiid;
-	public Long wid;
-	public String note;
-	public Integer status;
-	public String appmid;
+class StorageApply implements Serializable {
+	private Long said;
+	private String title;
+	private Long pid;
+	private Long cid;
+	private Long wiid;
+	private Long wid;
+	private String note;
+	private Integer status;
+	private String appmid;
 	public Long getSaid() {
 		return said;
 	}

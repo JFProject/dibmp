@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class Customer_record implements Serializable {
-	public Long crid;
-	public String cmid;
-	public Date cdate;
-	public Long criid;
-	public String note;
+public class CustomerRecord implements Serializable {
+	private Long crid;
+	private String cmid;
+	private Date cdate;
+	private Long criid;
+	private String note;
 	public Long getCrid() {
 		return crid;
 	}
