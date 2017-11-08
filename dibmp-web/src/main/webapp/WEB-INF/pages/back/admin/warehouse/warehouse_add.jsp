@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/pages/plugins/back/back_header.jsp"/>
 <%!
-	public static final String WAREHOUSE_ADD_URL = "" ;
+	public static final String WAREHOUSE_ADD_URL = "pages/back/admin/warehouse/add.action" ;
 %>
 <script type="text/javascript" src="js/pages/back/admin/warehouse/warehouse_add.js"></script>
 <body class="hold-transition skin-blue sidebar-mini"> 
@@ -42,9 +42,9 @@
 								<div class="col-md-5">
 									<select id="pid" name="pid" class="form-control">
 										<option value="">====== 请选择所在省份 ======</option>
-										<option value="1">河北省</option>
-										<option value="2">山西部</option>
-										<option value="3">广东省</option>
+									<c:forEach items="${allProvince}" var="province">
+										<option value="${province.pid}">${province.title}</option>
+									</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -55,10 +55,7 @@
 								<label class="col-md-3 control-label" for="cid">所在城市：</label>
 								<div class="col-md-5">
 									<select id="cid" name="cid" class="form-control">
-										<option value="">====== 请选择所在省份 ======</option>
-										<option value="1">石家庄</option>
-										<option value="2">沧州</option>
-										<option value="3">邯郸</option>
+										<option value="">====== 请选择所在城市 ======</option>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -89,11 +86,11 @@
 								<!-- 定义表单提示文字 -->
 								<label class="col-md-3 control-label" for="iid">仓库用途：</label>
 								<div class="col-md-5">
-									<select id="iid" name="iid" class="form-control">
+									<select id="wiid" name="wiid" class="form-control">
 										<option value="">====== 请选择库存商品类型 ======</option>
-										<option value="1">服装</option>
-										<option value="2">家电</option>
-										<option value="3">电子</option>
+										<c:forEach items="${allWitem }" var="witem">
+											<option value="${witem.wiid }">${witem.title }</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->

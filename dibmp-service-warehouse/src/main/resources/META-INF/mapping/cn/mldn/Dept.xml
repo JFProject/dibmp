@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mldn.dibmp.dao.IDeptDAO">
+	<select id="findAllDept" resultType="Dept" parameterType="Long">
+		SELECT did,dname,mid,maxnum,currnum FROM dept
+		<where>
+			did IN  
+			<foreach collection="list" open="(" close=")" separator="," item="ele">
+				#{ele} 
+			</foreach>
+		</where>
+	</select>
+</mapper>

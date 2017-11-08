@@ -1,7 +1,9 @@
 package cn.mldn.dibmp.service;
 
+import java.util.List;
 import java.util.Map;
 
+import cn.mldn.dibmp.vo.Dept;
 import cn.mldn.dibmp.vo.Warehouse;
 
 public interface IWarehouseServiceBack {
@@ -33,4 +35,29 @@ public interface IWarehouseServiceBack {
 	 * 2、key = "allRecorders", value表示所有的记录数
 	 */
 	public Map<String,Object> list(long currentPage,int lineSize,String column,String keyWord) ;
+	/**
+	 * 获取所有的部门信息。
+	 * @return
+	 */
+	public List<Dept> getDept(List<Long> ids);
+	/**
+	 * 根据部门编号获取所有的雇员信息。
+	 * @return
+	 */
+	public Map<String,Object> getMember(long currentPage, int lineSize,Long did);
+	
+	/**
+	 * 根据指定编号修改仓库管理员
+	 * @param wid 仓库编号
+	 * @param Adminname 修改的名称
+	 * @return
+	 */
+	public boolean EditByWid(Long wid,String admin);
+	/**
+	 * 根据指定编号修改仓库管理员
+	 * @param wid 仓库编号
+	 * @param Adminname 修改的名称
+	 * @return
+	 */
+	public boolean Edit(Warehouse vo);
 }

@@ -75,11 +75,25 @@ $(function(){
 	$(cid).on("change",function() {
 		handleAddress() ;	// 处理地址 
 	}) ;
-	$(pid).on("change",function(){
+	/*$(pid).on("change",function(){
 		if (this.value != "") {	// 有内容，需要进行ajax异步加载
 			handleAddress() ;	// 处理地址 
 		} else {
 			$("#cid option:gt(0)").remove() ;
+		}
+	}) ;*/
+	$(pid).on("change",function(){
+		if (this.value != "") {	// 有内容，需要进行ajax异步加载
+			$.post("pages/back/admin/warehouse/getCity.action",{"pid":this.value},
+					function(data){
+				$("#cid option:gt(0)").remove() ;
+				for (x = 0 ; x < data.allCity.length ; x ++) {
+					$("#cid").append("<option value='"+data.allCity[x].cid+"'>"+data.allCity[x].title+"</option>") ;
+				}
+			},"json") ;
+		} else {
+			$("#stid").remove() ;
+			$("#stid").append("<option value=''>====== 请选择所在城市 ======</option>") ;
 		}
 	}) ;
 })
