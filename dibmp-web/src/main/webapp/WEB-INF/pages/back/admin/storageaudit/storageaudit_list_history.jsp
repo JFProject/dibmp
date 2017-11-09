@@ -37,16 +37,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th class="text-center" style="width:10%;">20001010</th> 
-							<td class="text-left"><span id="sid-1" style="cursor:pointer;">2017双十一衣帽入库</span></td>
-							<td class="text-left"><span id="wid-1" style="cursor:pointer;">北京通州仓库一号库</span></td>
-							<td class="text-center">2019-10-10</td>
-							<td class="text-center"><span id="mid-admin" style="cursor:pointer;">老李</span></td>
-							<td class="text-center">100</td>
-							<td class="text-center">10000</td>
-							<td class="text-center"><span id="mid-admin" style="cursor:pointer;">老张</span></td>
-						</tr>
+						<c:forEach items="${allStorageApplyDetails }" var="storageApplyDetails">
+							<tr>
+								<th class="text-center" style="width:10%;">${storageApplyDetails.said }</th> 
+								<td class="text-left"><span id="said-${storageApplyDetails.said }" style="cursor:pointer;">${storageApplyDetails.title }</span></td>
+								<td class="text-left"><span id="wid-${storageApplyDetails.wid }" style="cursor:pointer;">${allProvinceName[storageApplyDetails.said]} ${allCityName[storageApplyDetails.said]} ${allWarehouseName[storageApplyDetails.said] }</span></td>
+								<td class="text-center">${allAppDate[storageApplyDetails.said] }</td>
+								<td class="text-center"><span id="mid-${storageApplyDetails.appmid }" style="cursor:pointer;">${allAppName[storageApplyDetails.said] }</span></td>
+								<td class="text-center">${allCount[storageApplyDetails.said] }</td>
+								<td class="text-center">${allPrice[storageApplyDetails.said] }</td>
+								<td class="text-center"><span id="mid-${allAuditInfo[storageApplyDetails.said].mid }" style="cursor:pointer;">${allAuditInfo[storageApplyDetails.said].name }</span></td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div id="splitBarDiv" style="float:right">

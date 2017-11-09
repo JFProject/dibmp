@@ -39,7 +39,7 @@
 							<th class="text-center" style="width:10%;">商品类型</th>
 							<th class="text-center" style="width:10%;">申请状态</th>
 							<th class="text-center" style="width:10%;">商品数量</th>
-							<th class="text-left" style="width:30%;">操作</th>
+							<th class="text-center" style="width:30%;">操作</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -47,10 +47,10 @@
 							<tr>
 								<th class="text-center" style="width:10%;">${storageApply.said }</th> 
 								<td class="text-left">
-									<c:if test="${storageApply.status == 0 or storageApply.status == 2}">
+									<c:if test="${storageApply.status == 0 or storageApply.status == 3}">
 										<a href="<%=STORAGE_EDIT_URL%>?said=${storageApply.said }">${storageApply.title }</a>
 									</c:if>
-									<c:if test="${storageApply.status == 1 or storageApply.status == 3}">
+									<c:if test="${storageApply.status == 1 or storageApply.status == 2 or storageApply.status == 4}">
 										${storageApply.title }
 									</c:if>
 								</td>
@@ -60,12 +60,15 @@
 									<td class="text-center"><span class="text-muted">未提交</span></td>
 								</c:if>
 								<c:if test="${storageApply.status == 1}">
-									<td class="text-center"><span class="text-primary">待审核</span></td>
+									<td class="text-center"><span class="text-primary">待财务审核</span></td>
 								</c:if>
 								<c:if test="${storageApply.status == 2}">
-									<td class="text-center"><span class="text-danger">未通过</span></td>
+									<td class="text-center"><span class="text-info">待库管审核</span></td>
 								</c:if>
 								<c:if test="${storageApply.status == 3}">
+									<td class="text-center"><span class="text-danger">未通过</span></td>
+								</c:if>
+								<c:if test="${storageApply.status == 4}">
 									<td class="text-center"><span class="text-success">已完成</span></td>
 								</c:if>
 								<td class="text-center">${allCount[storageApply.said] }</td>
@@ -82,7 +85,7 @@
 										<a href="<%=STORAGE_LIST_DETAILS_URL%>?said=${storageApply.said }" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-th"></span>&nbsp;查看详情</a>
 									</c:if>
-									<c:if test="${storageApply.status == 1}">
+									<c:if test="${storageApply.status == 1 or storageApply.status == 2}">
 										<a href="<%=STORAGE_RESET_URL%>?said=${storageApply.said }" class="btn btn-danger btn-xs">
 											<span class="glyphicon glyphicon-share"></span>&nbsp;取消申请</a>
 									</c:if>

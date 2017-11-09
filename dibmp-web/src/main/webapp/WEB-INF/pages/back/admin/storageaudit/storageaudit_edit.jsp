@@ -27,31 +27,27 @@
 					<table class="table table-striped table-bordered table-hover">
 						<tr> 
 							<td style="width:150px;"><strong>入库标题：</strong></td>
-							<td>双13备货</td>
+							<td>${storageApply.title }</td>
 						</tr>
 						<tr>
 							<td><strong>存入仓库名称：</strong></td>
-							<td><span id="showWarehouse" style="cursor:pointer;">北京市 北京市 通州一号仓库</span></td>
+							<td><span id="showWarehouse-${storageApply.wid }" style="cursor:pointer;">${provinceName } ${cityName} ${widName }</span></td>
 						</tr>
 						<tr>
 							<td><strong>仓库类型：</strong></td>
-							<td>衣帽服饰</td>
+							<td>${wiidName }</td>
 						</tr>
 						<tr>
 							<td><strong>申请人：</strong></td>
-							<td><span id="showMember" style="cursor:pointer;">老李</span></td>
+							<td><span id="showMember-${storageApply.appmid }" style="cursor:pointer;">${appName }</span></td>
 						</tr>
 						<tr>
 							<td><strong>入库商品总价：</strong></td>
-							<td>￥20000</td>
+							<td>￥${totalPrice }</td>
 						</tr>
 						<tr>
 							<td><strong>入库单备注信息：</strong></td>
-							<td>我要上</td>
-						</tr>
-						<tr>
-							<td><strong>审核历史：</strong></td>
-							<td>历史的所有审核信息</td>
+							<td>${storageApply.note }</td>
 						</tr>
 					</table>
 				</div>
@@ -63,31 +59,20 @@
 								<label class="col-md-3 control-label" for="destination">审核结论：</label>
 								<div class="col-md-5">
 									<div class="radio-inline">
-										<label><input type="radio" id="audit" value="2" checked>
+										<label><input type="radio" name="flag" id="flag" value="2" checked>
 											&nbsp;<span class="text-danger">拒绝</span></label>
 									</div> 
 									<div class="radio-inline">
-										<label><input type="radio" id="audit" value="1">
+										<label><input type="radio" name="flag" id="flag" value="1">
 											&nbsp;<span class="text-success">通过</span></label>
 									</div> 
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="auditMsg"></div>
 							</div>
-							<!-- 定义输入表单样式，其中id主要用于设置颜色样式 -->
-							<div class="form-group" id="noteDiv">
-								<!-- 定义表单提示文字 -->
-								<label class="col-md-3 control-label" for="note">审核备注：</label>
-								<div class="col-md-5">
-									<!-- 定义表单输入组件 -->
-									<textarea id="note" name="note" rows="3"
-										class="form-control" placeholder="请输入审核所给出的意见信息" rows="10"></textarea>
-								</div>
-								<!-- 定义表单错误提示显示元素 -->
-								<div class="col-md-4" id="noteMsg"></div>
-							</div> 
 							<div class="form-group">
 								<div class="col-md-5 col-md-offset-3">
+									<input type="hidden" id="said" name="said" value="${storageApply.said }">
 									<button type="submit" class="btn btn-primary">增加</button>
 									<button type="reset" class="btn btn-warning">重置</button>
 								</div>
@@ -118,14 +103,16 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr class="text-primary">
-											<td class="text-center">10001</td>
-											<td class="text-left">衣服</td>
-											<td class="text-center">50</td>
-											<td class="text-center">39.2</td>
-											<td class="text-center">200</td>
-											<td class="text-center">2000</td>
-										</tr>
+										<c:forEach items="${allStorageApplyDetails }" var="storageApplyDetails">
+											<tr class="text-primary">
+												<td class="text-center">${storageApplyDetails.gid}</td>
+												<td class="text-left">${storageApplyDetails.name}</td>
+												<td class="text-center">${storageApplyDetails.num}</td>
+												<td class="text-center">${storageApplyDetails.price}</td>
+												<td class="text-center">${storageApplyDetails.weight}</td>
+												<td class="text-center">${price[storageApplyDetails.sadid] }</td>
+											</tr>
+										</c:forEach>
 									</tbody>
 								</table>
 							</div>

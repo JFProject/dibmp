@@ -28,4 +28,35 @@
 		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin
 		from warehouse where wid = #{wid}
 	</select>
+	<select id="findStorageApplyBySaid" parameterType="long" resultType="StorageApply">
+		select said,title,pid,cid,wiid,wid,note,status,appmid
+		from storage_apply where said=#{said} 
+	</select>
+	<select id="findProvinceByPid" parameterType="long" resultType="Province">
+		select pid,title from province where pid = #{pid}
+	</select>
+	<select id="findCityByCid" parameterType="long" resultType="City">
+		select cid,pid,title from city where cid = #{cid}
+	</select>
+	<select id="findWitemBywiid" parameterType="long" resultType="Witem">
+		select wiid,title from witem where wiid = #{wiid}
+	</select>
+	<update id="doEditStatus" parameterType="Map">
+		update storage_apply set status=#{status} where said=#{said}
+	</update>
+	<select id="findHistoryByStatus" parameterType="Map" resultType="StorageApply">
+		select said,title,pid,cid,wiid,wid,note,status,appmid
+		from storage_apply where status in (2,3,4) 
+		<if test="column !=null and keyWord != null">
+			and ${column} like #{keyWord}
+		</if>
+		limit #{start},#{lineSize}
+	</select>
+	<select id="getCountHistoryByStatus" parameterType="Map" resultType="long">
+		select count(*)
+		from storage_apply where status in (2,3,4)  
+		<if test="column !=null and keyWord != null">
+			and ${column} like #{keyWord}
+		</if>
+	</select>
 </mapper>
