@@ -14,7 +14,7 @@
 						<select id="did" name="did" class="form-control">
 							<option value="">====== 请选择雇员所在部门 ======</option>
 							<c:forEach items="${allDept }" var="dept">
-								<option value="${dept.did }">${dept.dname }</option>
+								<option value="${dept.did }">${dept.dname}</option>
 							</c:forEach>
 						</select>
 					</div>

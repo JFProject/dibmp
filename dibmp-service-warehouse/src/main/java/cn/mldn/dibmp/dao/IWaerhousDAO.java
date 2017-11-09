@@ -11,6 +11,7 @@ public interface IWaerhousDAO {
 	public boolean doCreate(Warehouse vo);
 	public boolean doUpdate(Warehouse vo);
 	public boolean doUpdateByWid(Map<String,Object> params);
+	public Warehouse findById(Long wid);
 	public List<Warehouse> findSplit(Map<String,Object> params);
 	public Long getSplitCount(Map<String,Object> params);
 }

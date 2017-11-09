@@ -92,8 +92,8 @@ $(function(){
 				}
 			},"json") ;
 		} else {
-			$("#stid").remove() ;
-			$("#stid").append("<option value=''>====== 请选择所在城市 ======</option>") ;
+			$("#cid").remove() ;
+			$("#cid").append("<option value=''>====== 请选择所在城市 ======</option>") ;
 		}
 	}) ;
 })

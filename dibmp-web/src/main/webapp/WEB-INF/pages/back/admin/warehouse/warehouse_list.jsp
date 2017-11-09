@@ -46,7 +46,7 @@
 								<td class="text-center">${warehouse.wiid}</td>
 								<td class="text-center">${warehouse.maximum}</td>
 								<td class="text-center">${warehouse.currnum}</td>
-								<td class="text-center" id="admin-${warehouse.wid}"><span id="mid_${warehouse.admin}" style="cursor:pointer;">${allMember[warehouse.admin].name}</span></td> 
+								<td class="text-center" id="admin-${warehouse.wid}"><span id="mid_${warehouse.admin}" style="cursor:pointer;">${allMember[warehouse.admin] }</span></td> 
 								<td class="text-left">
 									<button id="editadmin-${warehouse.wid}" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;编辑库管</button>

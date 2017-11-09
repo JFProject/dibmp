@@ -1,5 +1,9 @@
 package cn.mldn.dibmp.web.action.back;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
@@ -51,24 +55,65 @@ public class WarehouseActionBack extends AbstractAction {
 	@RequestMapping("edit_pre")
 	public ModelAndView editPre(long wid) {
 		ModelAndView mav = new ModelAndView(super.getPage("warehouse.edit.page"));
+		Map<String,Object> map = this.iw.editPro(wid) ;
+		Warehouse vo = (Warehouse)map.get("Warehouse");
+		mav.addAllObjects(map);
+		mav.addObject("allWitem", this.goodsService.addPre()) ;
+		String authPhoto = FastDFSUtil.getPhotoPath(vo.getPhoto());
+		mav.addObject("authPhoto", authPhoto) ;
 		return mav;
 	}
 	@RequestMapping("edit")
-	public ModelAndView edit() {
+	public ModelAndView edit(Warehouse vo,MultipartFile pic) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
-		super.setMsgAndUrl(mav, "warehouse.list.action", "vo.edit.success", TITLE);
+		if(pic.getSize() != 0) {
+			String photo = FastDFSUtil.upload(pic) ;
+			vo.setPhoto(photo);
+		}
+		vo.setRecorder((String)super.getRequest().getSession().getAttribute("mid"));
+		if(this.iw.Edit(vo)) {
+			super.setMsgAndUrl(mav, "warehouse.list.action", "vo.add.success", TITLE);
+		}else {
+			super.setMsgAndUrl(mav, "warehouse.list.action", "vo.add.failure", TITLE);
+		}
 		return mav;
 	}
 	@RequestMapping("list")
 	public ModelAndView list() {
 		SplitPageUtil spu = new SplitPageUtil("仓库名称:name|仓库地址:address", super.getPage("warehouse.list.action")) ;
 		ModelAndView mav = new ModelAndView(super.getPage("warehouse.list.page"));
-		mav.addAllObjects(this.iw.list(spu.getCurrentPage(), spu.getLineSize(), spu.getColumn(), spu.getKeyWord()));
+		mav.addAllObjects(this.iw.List(spu.getCurrentPage(), spu.getLineSize(), spu.getColumn(), spu.getKeyWord()));
+		List<Long> ids = new ArrayList<>();
+		ids.add(1L);
+		ids.add(7L);
+		ids.add(8L);
+		mav.addObject("allDept", this.iw.getDept(ids));
 		return mav;
 	}
 	@RequestMapping("getCity")
 	@ResponseBody
 	public Object getSubtypeByWiid(long pid) {
 		return this.iw.getCity(pid) ;
+	}
+	@RequestMapping("editAdmin")
+	@ResponseBody
+	public boolean editAdmin(long wid,String admin) {
+		System.out.println(wid);
+		System.out.println(admin);
+		return this.iw.EditByWid(wid, admin);
+	}
+	@RequestMapping("getDept")
+	public Object getDept(){
+		List<Long> ids = new ArrayList<>();
+		ids.add(1L);
+		ids.add(7L);
+		ids.add(8L);
+		return this.iw.getDept(ids);
+	}
+	@RequestMapping("getMember")
+	@ResponseBody
+	public Object getMember(Long did){
+		SplitPageUtil spu = new SplitPageUtil(null, super.getPage("warehouse.list.action")) ;
+		return this.iw.getMember(spu.getCurrentPage(), spu.getLineSize(),did);
 	}
 }

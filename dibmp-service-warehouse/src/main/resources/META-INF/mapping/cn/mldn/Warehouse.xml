@@ -28,6 +28,10 @@
 		select wid,name,pid,cid,wiid,address,area,maximum,photo,note 
 		from warehouse where name=#{name} ;
 	</select>
+	<select id="findById" parameterType="Long" resultType="Warehouse">
+		select wid,name,pid,cid,wiid,address,area,maximum,photo,note,currnum,admin,recorder
+		from warehouse where wid=#{wid};
+	</select>
 	<select id="findSplit" resultType="Warehouse" parameterType="map">
 		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin 
 		from warehouse 

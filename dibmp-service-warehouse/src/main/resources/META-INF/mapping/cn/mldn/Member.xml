@@ -8,7 +8,7 @@
 	<select id="findAllMem"  resultType="Member">
 		select mid,name FROM member;
 	</select>
-	<select id="findAllByDept" resultType="Member" ><!-- parameterType="map" -->
+	<select id="findAllByDept" resultType="Member" parameterType="map" ><!-- parameterType="map" -->
 		SELECT mid,lid,did,name,salary,phone,password,photo,note,hiredate,inmid,locked 
 		FROM member
 		<where>

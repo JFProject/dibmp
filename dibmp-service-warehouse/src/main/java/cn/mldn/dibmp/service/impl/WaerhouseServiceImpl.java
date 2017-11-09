@@ -39,7 +39,17 @@ public class WaerhouseServiceImpl extends AbstractService implements IWarehouseS
 		map.put("allProvince", this.pro.findAll());
 		return map;
 	}
-
+	
+	@Override
+	public Map<String, Object> editPro(Long wid) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("allProvince", this.pro.findAll());
+		Warehouse vo = this.waerhousDAO.findById(wid);
+		map.put("Warehouse",vo);
+		map.put("allCity", this.city.findAllByProvince(vo.getPid()));
+		return map;
+	}
+	
 	@Override
 	public boolean add(Warehouse vo) {
 		if(this.waerhousDAO.findByName(vo.getName()) != null){
@@ -55,12 +65,13 @@ public class WaerhouseServiceImpl extends AbstractService implements IWarehouseS
 	}
 
 	@Override
-	public Map<String, Object> list(long currentPage, int lineSize, String column, String keyWord) {
+	public Map<String, Object> List(long currentPage, int lineSize, String column, String keyWord) {
 		Map<String,Object> map = new HashMap<String,Object>() ;
-//		map.put("allWarehouse", this.waerhousDAO.findSplit(super.paramToMap(currentPage, lineSize, column, keyWord)));
-//		map.put("allRecorders", this.waerhousDAO.getSplitCount(super.paramToMap(column, keyWord)));
-//		map.put("allMember",ConvertToMap.ListToMap(this.mem.findAllMem()));
-		map.put("allMember",this.mem.findAllMem());
+		map.put("allWarehouse", this.waerhousDAO.findSplit(super.paramToMap(currentPage, lineSize, column, keyWord)));
+		map.put("allRecorders", this.waerhousDAO.getSplitCount(super.paramToMap(column, keyWord)));
+		map.put("allMember",ConvertToMap.ListToMap(this.mem.findAllMem()));
+//		System.err.println("bbbb");
+//		map.put("allMember",this.mem.findAllMem());
 		return map ;
 	}
 
@@ -92,5 +103,7 @@ public class WaerhouseServiceImpl extends AbstractService implements IWarehouseS
 		map.put("admin", admin);
 		return this.waerhousDAO.doUpdateByWid(map);
 	}
+
+	
 	
 }

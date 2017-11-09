@@ -9,19 +9,24 @@ import cn.mldn.dibmp.vo.Warehouse;
 public interface IWarehouseServiceBack {
 	/**
 	 * 仓库追加前，回显数据
-	 * @return
+	 * @return Map<String,Object>
 	 */
 	public Map<String,Object> addPro();
 	/**
+	 * 仓库修改数据前，回显数据
+	 * @return Map<String,Object>
+	 */
+	public Map<String,Object> editPro(Long wid);
+	/**
 	 * 仓库追加信息
 	 * @param vo
-	 * @return
+	 * @return boolean
 	 */
 	public boolean add(Warehouse vo);
 	/**
 	 * 根据省份ID 获取次省份的城市信息
 	 * @param pid
-	 * @return
+	 * @return Map<String,Object>
 	 */
 	public Map<String,Object> getCity(Long pid);
 	/**
@@ -34,7 +39,7 @@ public interface IWarehouseServiceBack {
 	 * 1、key = "allWarehouse", value表示所有的商品
 	 * 2、key = "allRecorders", value表示所有的记录数
 	 */
-	public Map<String,Object> list(long currentPage,int lineSize,String column,String keyWord) ;
+	public Map<String,Object> List(long currentPage,int lineSize,String column,String keyWord) ;
 	/**
 	 * 获取所有的部门信息。
 	 * @return
@@ -42,7 +47,7 @@ public interface IWarehouseServiceBack {
 	public List<Dept> getDept(List<Long> ids);
 	/**
 	 * 根据部门编号获取所有的雇员信息。
-	 * @return
+	 * @return Map<String,Object>
 	 */
 	public Map<String,Object> getMember(long currentPage, int lineSize,Long did);
 	
@@ -50,14 +55,14 @@ public interface IWarehouseServiceBack {
 	 * 根据指定编号修改仓库管理员
 	 * @param wid 仓库编号
 	 * @param Adminname 修改的名称
-	 * @return
+	 * @return boolean
 	 */
 	public boolean EditByWid(Long wid,String admin);
 	/**
 	 * 根据指定编号修改仓库管理员
 	 * @param wid 仓库编号
 	 * @param Adminname 修改的名称
-	 * @return
+	 * @return boolean
 	 */
 	public boolean Edit(Warehouse vo);
 }
