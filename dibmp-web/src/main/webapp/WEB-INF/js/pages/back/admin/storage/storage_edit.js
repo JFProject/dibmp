@@ -36,7 +36,7 @@ $(function(){
 			"wid" : {
 				required : true 
 			},
-			"iid" : {
+			"wiid" : {
 				required : true 
 			},
 			"note" : {
@@ -44,4 +44,32 @@ $(function(){
 			}
 		}
 	});
+	
+	$("#pid").on("change",function(){
+		id = $(this).val() ;
+		$("#cid").empty() ;
+		if(id != ""){
+			$.post("pages/back/admin/storage/getCity.action",{"pid":id},function(data){
+				for(var i = 0 ; i < data.length ; i++){
+					$("#cid").append("<option value=" + data[i].cid + ">" + data[i].title + "</option>") ;
+				}
+			},"json") ;
+		}else{
+			$("#cid").append("<option value=''>====== 请选择所在城市 ======</option>") ;
+		}
+	}) ;
+	
+	$("#wiid").on("change",function(){
+		id = $(this).val() ;
+		$("#wid").empty() ;
+		if(id != ""){
+			$.post("pages/back/admin/storage/getWarehouse.action",{"wiid":id},function(data){
+				for(var i = 0 ; i < data.length ; i++){
+					$("#wid").append("<option value=" + data[i].wid + ">" + data[i].name + "</option>") ;
+				}
+			},"json") ;
+		}else{
+			$("#wid").append("<option value=''>====== 请选择要存储的仓库  ======</option>") ;
+		}
+	}) ;
 })

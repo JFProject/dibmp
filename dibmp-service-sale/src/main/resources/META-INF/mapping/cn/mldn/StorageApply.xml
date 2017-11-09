@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mldn.dibmp.dao.IStorageApplyDAO">
+	<select id="findAllProvince" resultType="Province">
+		select pid,title from province
+	</select>
+	<select id="findAllWitem" resultType="Witem">
+		select wiid,title from witem
+	</select>
+	<select id="findCityByPid" parameterType="long" resultType="City">
+		select cid,pid,title from city where pid=#{pid}
+	</select>
+	<select id="findAllByWiid" parameterType="long" resultType="warehouse">
+		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin
+		from warehouse where wiid = #{wiid}
+	</select>
+	<insert id="doCreate" parameterType="StorageApply">
+		insert into storage_apply(title,pid,cid,wiid,wid,note,status,appmid)
+		values(#{title},#{pid},#{cid},#{wiid},#{wid},#{note},#{status},#{appmid})
+	</insert>
+	<select id="findByTitle" parameterType="String" resultType="StorageApply">
+		select said,title,pid,cid,wiid,wid,note,status,appmid
+		from storage_apply where title=#{title} 
+	</select>
+	<select id="findByMyself" parameterType="Map" resultType="StorageApply">
+		select said,title,pid,cid,wiid,wid,note,status,appmid
+		from storage_apply where appmid=#{mid} 
+		<if test="column != null and keyWord != null">
+			and ${column} like #{keyWord}
+		</if>
+		order by status limit #{start},#{lineSize} 
+	</select>
+	<select id="getMyselfCount" parameterType="Map" resultType="long">
+		select count(*)
+		from storage_apply where appmid=#{mid} 
+		<if test="column != null and keyWord != null">
+			and ${column} like #{keyWord}
+		</if>
+	</select>
+	<select id="findByWid" parameterType="long" resultType="Warehouse">
+		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin
+		from warehouse where wid = #{wid}
+	</select>
+	<select id="findWitemByWiid" parameterType="long" resultType="Witem">
+		select wiid,title from witem where wiid=#{wiid}
+	</select>
+	<select id="findBySaid" parameterType="long" resultType="StorageApply">
+		select said,title,pid,cid,wiid,wid,note,status,appmid
+		from storage_apply where said=#{said} 
+	</select>
+	<update id="doEdit" parameterType="StorageApply">
+		update storage_apply set title=#{title},pid=#{pid},cid=#{cid},wiid=#{wiid},wid=#{wid},note=#{note},status=#{status},appmid=#{appmid}
+		where said=#{said}
+	</update>
+	<update id="doEditStatus" parameterType="Map">
+		update storage_apply set status=#{status} where said=#{said}
+	</update>
+	<delete id="doRemove" parameterType="long">
+		delete from storage_apply where said=#{said}
+	</delete>
+	<select id="findGoodsByGid" parameterType="long" resultType="Goods">
+		SELECT gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag
+		FROM goods WHERE gid=#{gid}
+	</select>
+</mapper>

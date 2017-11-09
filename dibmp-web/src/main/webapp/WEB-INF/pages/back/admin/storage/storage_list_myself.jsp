@@ -10,6 +10,7 @@
 	public static final String STORAGE_EDIT_URL = "pages/back/admin/storage/edit_pre.action" ;
 	public static final String STORAGE_LIST_DETAILS_URL = "pages/back/admin/storage/list_details.action" ;
 	public static final String STORAGE_DELETE_URL = "pages/back/admin/storage/remove.action" ;
+	public static final String STORAGE_RESET_URL = "pages/back/admin/storage/reset.action" ;
 %>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -33,32 +34,61 @@
 					<thead>
 						<tr>
 							<th class="text-center" style="width:10%;">入库单编号 </th> 
-							<th class="text-left" style="width:20%;">申请标题</th> 
-							<th class="text-left" style="width:20%;">入库仓库</th>
+							<th class="text-left" style="width:15%;">申请标题</th> 
+							<th class="text-left" style="width:15%;">入库仓库</th>
 							<th class="text-center" style="width:10%;">商品类型</th>
 							<th class="text-center" style="width:10%;">申请状态</th>
 							<th class="text-center" style="width:10%;">商品数量</th>
-							<th class="text-left" style="width:20%;">操作</th>
+							<th class="text-left" style="width:30%;">操作</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th class="text-center" style="width:10%;">20001010</th> 
-							<td class="text-left">
-								<a href="<%=STORAGE_EDIT_URL%>?sid=1">2017双十一衣帽入库</a></td>
-							<td class="text-left">北京通州仓库一号库</td>
-							<td class="text-center">服装衣帽</td>
-							<td class="text-center">未提交</td>
-							<td class="text-center">100</td>
-							<td class="text-left">
-								<a href="<%=STORAGE_SUBMIT_URL%>?sid=1" class="btn btn-primary btn-xs">
-									<span class="fa fa-rocket"></span>&nbsp;提交申请</a>
-								<a href="<%=STORAGE_LIST_DETAILS_URL%>?sid=1" class="btn btn-warning btn-xs">
-									<span class="fa fa-th-list"></span>&nbsp;入库清单</a>
-								<a href="<%=STORAGE_DELETE_URL%>?sid=1" class="btn btn-danger btn-xs">
-									<span class="glyphicon glyphicon-trash"></span>&nbsp;删除申请</a>
-							</td>
-						</tr>
+						<c:forEach items="${allStorageApply }" var="storageApply">
+							<tr>
+								<th class="text-center" style="width:10%;">${storageApply.said }</th> 
+								<td class="text-left">
+									<c:if test="${storageApply.status == 0 or storageApply.status == 2}">
+										<a href="<%=STORAGE_EDIT_URL%>?said=${storageApply.said }">${storageApply.title }</a>
+									</c:if>
+									<c:if test="${storageApply.status == 1 or storageApply.status == 3}">
+										${storageApply.title }
+									</c:if>
+								</td>
+								<td class="text-left">${allWarehouse[storageApply.said].address }</td>
+								<td class="text-center">${allWitem[storageApply.said].title }</td>
+								<c:if test="${storageApply.status == 0}">
+									<td class="text-center"><span class="text-muted">未提交</span></td>
+								</c:if>
+								<c:if test="${storageApply.status == 1}">
+									<td class="text-center"><span class="text-primary">待审核</span></td>
+								</c:if>
+								<c:if test="${storageApply.status == 2}">
+									<td class="text-center"><span class="text-danger">未通过</span></td>
+								</c:if>
+								<c:if test="${storageApply.status == 3}">
+									<td class="text-center"><span class="text-success">已完成</span></td>
+								</c:if>
+								<td class="text-center">${allCount[storageApply.said] }</td>
+								<td class="text-center">
+									<c:if test="${storageApply.status == 0}">
+										<a href="<%=STORAGE_SUBMIT_URL%>?said=${storageApply.said }" class="btn btn-primary btn-xs">
+											<span class="fa fa-rocket"></span>&nbsp;提交申请</a>
+										<a href="<%=STORAGE_LIST_DETAILS_URL%>?said=${storageApply.said }" class="btn btn-warning btn-xs">
+											<span class="fa fa-th-list"></span>&nbsp;入库清单</a>
+										<a href="<%=STORAGE_DELETE_URL%>?said=${storageApply.said }" class="btn btn-danger btn-xs">
+											<span class="glyphicon glyphicon-trash"></span>&nbsp;删除申请</a>
+									</c:if>
+									<c:if test="${storageApply.status != 0}">
+										<a href="<%=STORAGE_LIST_DETAILS_URL%>?said=${storageApply.said }" class="btn btn-primary btn-xs">
+											<span class="glyphicon glyphicon-th"></span>&nbsp;查看详情</a>
+									</c:if>
+									<c:if test="${storageApply.status == 1}">
+										<a href="<%=STORAGE_RESET_URL%>?said=${storageApply.said }" class="btn btn-danger btn-xs">
+											<span class="glyphicon glyphicon-share"></span>&nbsp;取消申请</a>
+									</c:if>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div id="splitBarDiv" style="float:right">

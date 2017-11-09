@@ -19,60 +19,74 @@
 			<div class="panel-heading">
 				<strong><span class="glyphicon glyphicon-list"></span>&nbsp;我的入库申请单</strong>
 			</div>
+			<div style="display:none" id="said">${storageApply.said }</div>
+			<div style="display:none" id="wiid">${storageApply.wiid }</div>
 			<div class="panel-body">
 				<div>
 					<table class="table table-striped table-bordered table-hover">
 						<tr> 
 							<td style="width:150px;"><strong>入库标题：</strong></td>
-							<td>双13备货</td>
+							<td>${storageApply.title }</td>
 						</tr>
 						<tr>
 							<td><strong>存入仓库名称：</strong></td>
-							<td>北京市 北京市 通州一号仓库</td>
+							<td>${address }</td>
 						</tr>
 						<tr>
 							<td><strong>仓库类型：</strong></td>
-							<td>衣帽服饰</td>
+							<td>${title }</td>
 						</tr>
 						<tr>
 							<td><strong>备注信息：</strong></td>
-							<td>我要上</td>
+							<td>${storageApply.note }</td>
 						</tr>
-						<tr>
-							<td><strong>入库操作：</strong></td>
-							<td>
-								<button id="addbut" class="btn btn-danger btn-xs">
-										<span class="glyphicon glyphicon-edit"></span>&nbsp;追加商品</button>
-							</td>
-						</tr>
+						<c:if test="${storageApply.status == 0 }">
+							<tr>
+								<td><strong>入库操作：</strong></td>
+								<td>
+									<button id="addbut" class="btn btn-danger btn-xs">
+											<span class="glyphicon glyphicon-edit"></span>&nbsp;追加商品</button>
+								</td>
+							</tr>
+						</c:if>
 					</table>
 				</div>
+				<c:if test="${storageApply.status == 0 }">
+					<div><font>请添加<span id="title" style="color:red;font-size:16px">${title }</span>类型的商品</font></div>
+					<div>&nbsp;</div>
+				</c:if>
 				<div>
 					<table class="table table-condensed" id="detailsTab">
 						<thead>
 							<tr>
-								<th class="text-left" style="width:10%;">商品编号</th> 
-								<th class="text-left" style="width:40%;">商品名称</th> 
-								<th class="text-left" style="width:10%;">入库数量</th>
-								<th class="text-left" style="width:10%;">商品单价（元）</th>
-								<th class="text-left" style="width:10%;">单位重量（g）</th>
-								<th class="text-left" style="width:20%;">操作</th>
+								<th class="text-left" style="width:15%;">商品编号</th> 
+								<th class="text-left" style="width:20%;">商品名称</th> 
+								<th class="text-left" style="width:15%;">入库数量</th>
+								<th class="text-left" style="width:15%;">商品单价（元）</th>
+								<th class="text-left" style="width:15%;">单位重量（g）</th>
+								<c:if test="${storageApply.status == 0 }">
+									<th class="text-left" style="width:20%;">操作</th>
+								</c:if>
 							</tr>
 						</thead>
 						<tbody>
-							<tr id="dettr-1" class="text-success">
-								<td><input type="text" id="gid-1" value="100001"/></td>
-								<td><input type="text" id="name-1" value="衣服" size="50"/></td>
-								<td><input type="text" id="amount-1" value="50" maxlength="8" size="8"/></td>
-								<td><input type="text" id="price-1" value="39.2" maxlength="8" size="8"/></td>
-								<td><input type="text" id="weight-1" value="200g" maxlength="8" size="8"/></td>
-								<td>
-									<button id="save-1" class="btn btn-primary btn-xs">
-										<span class="glyphicon glyphicon-edit"></span>&nbsp;保存</button>
-									<button id="remove-1" class="btn btn-danger btn-xs">
-										<span class="glyphicon glyphicon-edit"></span>&nbsp;移除</button>
-								</td>
-							</tr>
+							<c:forEach items="${goodsTemps }" var="storageApplyDetails">
+								<tr id='dettr-${storageApplyDetails.gid }' class='text-success'>
+									<td><input type='text' id='gid-${storageApplyDetails.gid }' value='${storageApplyDetails.gid }'/></td>
+									<td><input type='text' id='name-${storageApplyDetails.gid }' value='${storageApplyDetails.name }'/></td>
+									<td><input type='text' id='amount-${storageApplyDetails.gid }' value='${storageApplyDetails.num }' maxlength='7' size='8'/></td>
+									<td><input type='text' id='price-${storageApplyDetails.gid }' value='${storageApplyDetails.price }' maxlength='7' size='8'/></td>
+									<td><input type='text' id='weight-${storageApplyDetails.gid }' value='${storageApplyDetails.weight }' maxlength='7' size='8'/></td>
+									<c:if test="${storageApply.status == 0 }">
+										<td>
+											<button id='save-${storageApplyDetails.gid }' class='btn btn-primary btn-xs'>
+												<span class='glyphicon glyphicon-edit'></span>&nbsp;保存</button>
+											<button id='remove-${storageApplyDetails.gid }' class='btn btn-danger btn-xs'>
+											<span class='glyphicon glyphicon-edit'></span>&nbsp;移除</button>
+										</td>
+									</c:if>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

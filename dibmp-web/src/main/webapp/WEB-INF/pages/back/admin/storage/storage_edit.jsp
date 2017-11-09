@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/pages/plugins/back/back_header.jsp"/>
 <%!
-	public static final String STORAGE_EDIT_URL = "" ;
+	public static final String STORAGE_EDIT_URL = "pages/back/admin/storage/edit.action" ;
 %>
 <script type="text/javascript" src="js/pages/back/admin/storage/storage_edit.js"></script>
 <body class="hold-transition skin-blue sidebar-mini"> 
@@ -31,7 +31,7 @@
 								<div class="col-md-5">
 									<!-- 定义表单输入组件 -->
 									<input type="text" id="title" name="title" class="form-control"
-										placeholder="请输入申请单标题名称">
+										placeholder="请输入申请单标题名称" value="${storageApply.title }">
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="titleMsg"></div>
@@ -42,9 +42,9 @@
 								<div class="col-md-5">
 									<select id="pid" name="pid" class="form-control">
 										<option value="">====== 请选择所在省份 ======</option>
-										<option value="1">河北省</option>
-										<option value="2">山西部</option>
-										<option value="3">广东省</option>
+										<c:forEach items="${allProvince }" var="province">
+											<option value="${province.pid }" ${storageApply.pid == province.pid ? "selected" : ""}>${province.title}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -55,10 +55,10 @@
 								<label class="col-md-3 control-label" for="cid">入库城市：</label>
 								<div class="col-md-5">
 									<select id="cid" name="cid" class="form-control">
-										<option value="">====== 请选择所在省份 ======</option>
-										<option value="1">石家庄</option>
-										<option value="2">沧州</option>
-										<option value="3">邯郸</option>
+										<option value="">====== 请选择所在城市 ======</option>
+										<c:forEach items="${cityByPid }" var="city">
+											<option value="${city.cid }" ${storageApply.cid == city.cid ? "selected" : ""}>${city.title}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -66,17 +66,17 @@
 							</div>
 							<div class="form-group" id="iidDiv">
 								<!-- 定义表单提示文字 -->
-								<label class="col-md-3 control-label" for="iid">商品类型：</label>
+								<label class="col-md-3 control-label" for="wiid">商品类型：</label>
 								<div class="col-md-5">
-									<select id="iid" name="iid" class="form-control">
+									<select id="wiid" name="wiid" class="form-control">
 										<option value="">====== 请选择库存商品类型 ======</option>
-										<option value="1">服装</option>
-										<option value="2">家电</option>
-										<option value="3">电子</option>
+										<c:forEach items="${allWitem }" var="witem">
+											<option value="${witem.wiid }" ${storageApply.wiid == witem.wiid ? "selected" : ""}>${witem.title}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
-								<div class="col-md-4" id="iidMsg"></div>
+								<div class="col-md-4" id="wiidMsg"></div>
 							</div>
 							<div class="form-group" id="widDiv">
 								<!-- 定义表单提示文字 -->
@@ -84,9 +84,9 @@
 								<div class="col-md-5">
 									<select id="wid" name="wid" class="form-control">
 										<option value="">====== 请选择要存储的仓库 ======</option>
-										<option value="1">通州一号仓库</option>
-										<option value="2">通州二号仓库</option>
-										<option value="3">通州三号仓库</option>
+										<c:forEach items="${warehouseByWiid }" var="warehouse">
+											<option value="${warehouse.wid }" ${storageApply.wid == warehouse.wid ? "selected" : ""}>${warehouse.name}</option>
+										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -99,13 +99,14 @@
 								<div class="col-md-5">
 									<!-- 定义表单输入组件 -->
 									<textarea id="note" name="note"
-										class="form-control" placeholder="请输入仓库的详细信息" rows="10"></textarea>
+										class="form-control" placeholder="请输入仓库的详细信息" rows="10">${storageApply.note }</textarea>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="noteMsg"></div>
 							</div> 
 							<div class="form-group">
 								<div class="col-md-5 col-md-offset-3">
+									<input type="hidden" name="said" value="${storageApply.said }">
 									<button type="submit" class="btn btn-primary">编辑</button>
 									<button type="reset" class="btn btn-warning">重置</button>
 								</div>

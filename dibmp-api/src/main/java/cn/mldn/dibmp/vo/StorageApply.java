@@ -3,7 +3,7 @@ package cn.mldn.dibmp.vo;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-class StorageApply implements Serializable {
+public class StorageApply implements Serializable {
 	private Long said;
 	private String title;
 	private Long pid;
