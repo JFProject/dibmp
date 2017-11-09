@@ -88,6 +88,7 @@ public class WarehouseActionBack extends AbstractAction {
 		ids.add(7L);
 		ids.add(8L);
 		mav.addObject("allDept", this.iw.getDept(ids));
+		mav.addObject("allWitem", this.goodsService.addPre()) ;
 		return mav;
 	}
 	@RequestMapping("getCity")

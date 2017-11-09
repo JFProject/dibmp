@@ -43,7 +43,11 @@
 							<tr>
 								<td class="text-left">${warehouse.name}</td>
 								<td class="text-left">${warehouse.address}</td>
-								<td class="text-center">${warehouse.wiid}</td>
+								<td class="text-center">
+								<c:forEach items="${allWitem }" var="witem">
+									${witem.wiid == warehouse.wiid?witem.title:""}
+								</c:forEach>
+								</td>
 								<td class="text-center">${warehouse.maximum}</td>
 								<td class="text-center">${warehouse.currnum}</td>
 								<td class="text-center" id="admin-${warehouse.wid}"><span id="mid_${warehouse.admin}" style="cursor:pointer;">${allMember[warehouse.admin] }</span></td> 
