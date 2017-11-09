@@ -40,19 +40,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th class="text-center" style="width:10%;">20001010</th> 
-							<td class="text-left"><span id="sid-1" style="cursor:pointer;">2017双十一衣帽入库</span></td>
-							<td class="text-left"><span id="wid-1" style="cursor:pointer;">北京通州仓库一号库</span></td>
-							<td class="text-center">2019-10-09</td>
-							<td class="text-center"><span id="mid-admin" style="cursor:pointer;">老李</span></td>
-							<td class="text-center">100</td>
-							<td class="text-center">10000</td>
-							<td class="text-left">
-								<a href="<%=STORAGEAUDIT_EDIT_URL%>?sid=1" class="btn btn-primary btn-xs">
-									<span class="glyphicon glyphicon-edit"></span>&nbsp;处理申请</a>
-							</td>
-						</tr>
+						<c:forEach items="${allStorageApplyDetails }" var="storageApplyDetails">
+							<tr>
+								<th class="text-center" style="width:10%;">${storageApplyDetails.said }</th> 
+								<td class="text-left"><span id="sid-${storageApplyDetails.said }" style="cursor:pointer;">${storageApplyDetails.title }</span></td>
+								<td class="text-left"><span id="wid-${storageApplyDetails.said }" style="cursor:pointer;">${allWarehouseName[storageApplyDetails.said] }</span></td>
+								<td class="text-center">${allAppDate[storageApplyDetails.said] }</td>
+								<td class="text-center"><span id="mid-${storageApplyDetails.appmid }" style="cursor:pointer;">${allAppName[storageApplyDetails.said] }</span></td>
+								<td class="text-center">${allCount[storageApplyDetails.said] }</td>
+								<td class="text-center">${allPrice[storageApplyDetails.said] }</td>
+								<td class="text-left">
+									<a href="<%=STORAGEAUDIT_EDIT_URL%>?sid=${storageApplyDetails.said }" class="btn btn-primary btn-xs">
+										<span class="glyphicon glyphicon-edit"></span>&nbsp;处理申请</a>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div id="splitBarDiv" style="float:right">

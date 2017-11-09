@@ -63,4 +63,10 @@
 		SELECT gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag
 		FROM goods WHERE gid=#{gid}
 	</select>
+	<insert id="doCreateStorageApplyDetails" parameterType="StorageApplyDetails">
+		insert into storage_apply_details(said,gid,name,num,price,weight) values (#{said},#{gid},#{name},#{num},#{price},#{weight})
+	</insert>
+	<delete id="doRemoveBySaid" parameterType="long">
+		delete from storage_apply_details where said = #{said}
+	</delete>
 </mapper>

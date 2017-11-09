@@ -42,11 +42,9 @@ function addDetails(tdid) {
 				"	<td><input type='text' id='amount-"+tdid+"' value='0' maxlength='7' size='8'/></td>" +
 				"	<td><input type='text' id='price-"+tdid+"' value='0.0' maxlength='7' size='8'/></td>" +
 				"	<td><input type='text' id='weight-"+tdid+"' value='0' maxlength='7' size='8'/></td>" +
-				"	<td>" +
+				"	<td style='text-align:center'>" +
 				"		<button id='save-"+tdid+"' class='btn btn-primary btn-xs'>" +
 				"			<span class='glyphicon glyphicon-edit'></span>&nbsp;保存</button>" +
-				"		<button id='remove-"+tdid+"' class='btn btn-danger btn-xs'>" +
-				"			<span class='glyphicon glyphicon-edit'></span>&nbsp;移除</button>" +
 				"	</td>" +
 				"</tr>") ;
 	$(detailsTab).append(trInfo) ;

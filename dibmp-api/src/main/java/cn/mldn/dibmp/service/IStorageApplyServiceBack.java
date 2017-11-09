@@ -67,12 +67,19 @@ public interface IStorageApplyServiceBack {
 	 */
 	public boolean edit(StorageApply storageApply) ;
 	/**
-	 * 提交申请
+	 * 提交申请，修改状态同时在storage_apply_details表中追加记录
 	 * @param status 入库单状态
 	 * @param said 入库单编号
 	 * @return 修改成功返回true
 	 */
-	public boolean editStatus(int status,long said) ;
+	public boolean submit(int status,long said) ;
+	/**
+	 * 取消入库申请单
+	 * @param status 入库单状态
+	 * @param said 入库单编号
+	 * @return 修改成功返回true
+	 */
+	public boolean reset(int status,long said) ;
 	/**
 	 * 删除入库申请单
 	 * @param said 要删除的入库申请单编号

@@ -65,7 +65,7 @@
 								<th class="text-left" style="width:15%;">商品单价（元）</th>
 								<th class="text-left" style="width:15%;">单位重量（g）</th>
 								<c:if test="${storageApply.status == 0 }">
-									<th class="text-left" style="width:20%;">操作</th>
+									<th class="text-center" style="width:20%;">操作</th>
 								</c:if>
 							</tr>
 						</thead>
@@ -78,7 +78,7 @@
 									<td><input type='text' id='price-${storageApplyDetails.gid }' value='${storageApplyDetails.price }' maxlength='7' size='8'/></td>
 									<td><input type='text' id='weight-${storageApplyDetails.gid }' value='${storageApplyDetails.weight }' maxlength='7' size='8'/></td>
 									<c:if test="${storageApply.status == 0 }">
-										<td>
+										<td style='text-align:center'>
 											<button id='save-${storageApplyDetails.gid }' class='btn btn-primary btn-xs'>
 												<span class='glyphicon glyphicon-edit'></span>&nbsp;保存</button>
 											<button id='remove-${storageApplyDetails.gid }' class='btn btn-danger btn-xs'>

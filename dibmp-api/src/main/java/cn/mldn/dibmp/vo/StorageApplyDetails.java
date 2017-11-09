@@ -5,11 +5,18 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class StorageApplyDetails implements Serializable {
 	private Long sadid;
+	private Long said ;
 	private Long gid;
 	private String name;
 	private Integer num;
 	private Double price;
 	private Double weight;
+	public void setSaid(Long said) {
+		this.said = said;
+	}
+	public Long getSaid() {
+		return said;
+	}
 	public Long getSadid() {
 		return sadid;
 	}

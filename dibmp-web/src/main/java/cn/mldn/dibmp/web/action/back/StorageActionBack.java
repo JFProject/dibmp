@@ -83,7 +83,7 @@ public class StorageActionBack extends AbstractAction {
 	public ModelAndView submit(long said) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
 		int status = 1 ;
-		if(this.storageApplyService.editStatus(status, said)) {
+		if(this.storageApplyService.submit(status, said)) {
 			super.setMsgAndUrl(mav, "storage.list.myself.action", "submit.success");
 		}else {
 			super.setMsgAndUrl(mav, "storage.list.myself.action", "submit.failure");
@@ -94,7 +94,7 @@ public class StorageActionBack extends AbstractAction {
 	public ModelAndView reset(long said) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
 		int status = 0 ;
-		if(this.storageApplyService.editStatus(status, said)) {
+		if(this.storageApplyService.reset(status, said)) {
 			super.setMsgAndUrl(mav, "storage.list.myself.action", "reset.success");
 		}else {
 			super.setMsgAndUrl(mav, "storage.list.myself.action", "reset.failure");

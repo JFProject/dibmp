@@ -7,6 +7,7 @@ import cn.mldn.dibmp.vo.City;
 import cn.mldn.dibmp.vo.Goods;
 import cn.mldn.dibmp.vo.Province;
 import cn.mldn.dibmp.vo.StorageApply;
+import cn.mldn.dibmp.vo.StorageApplyDetails;
 import cn.mldn.dibmp.vo.Warehouse;
 import cn.mldn.dibmp.vo.Witem;
 
@@ -72,4 +73,8 @@ public interface IStorageApplyDAO {
 	public boolean doRemove(long said) ;
 	
 	public Goods findGoodsByGid(long gid) ;
+	
+	public boolean doCreateStorageApplyDetails(StorageApplyDetails storageApplyDetails) ;
+	
+	public boolean doRemoveBySaid(long said) ;
 }

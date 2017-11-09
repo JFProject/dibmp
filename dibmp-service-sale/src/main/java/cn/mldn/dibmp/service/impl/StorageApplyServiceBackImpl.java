@@ -1,6 +1,7 @@
 package cn.mldn.dibmp.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -27,7 +28,7 @@ public class StorageApplyServiceBackImpl extends AbstractService implements ISto
 	@Resource
 	private IStorageApplyDAO storageApply ;
 	@Resource
-	private RedisTemplate<String,StorageApplyDetails> redisTemplate ;
+	private RedisTemplate<String,Object> redisTemplate ;
 	@Override
 	public Map<String, Object> addPre() {
 		Map<String,Object> map = new HashMap<String,Object>() ;
@@ -69,8 +70,12 @@ public class StorageApplyServiceBackImpl extends AbstractService implements ISto
 			Set<Object> attrs = this.redisTemplate.opsForHash().keys(String.valueOf(storageApply.getSaid())) ;
 			Iterator<Object> iterTemp = attrs.iterator() ;
 			while(iterTemp.hasNext()) {
-				StorageApplyDetails storageApplyDetails = (StorageApplyDetails)this.redisTemplate.opsForHash().get(String.valueOf(storageApply.getSaid()), iterTemp.next()) ;
-				count += storageApplyDetails.getNum() ;
+				Object obj = iterTemp.next() ;
+				if(this.redisTemplate.opsForHash().get(String.valueOf(storageApply.getSaid()), obj) instanceof StorageApplyDetails) {
+					StorageApplyDetails storageApplyDetails = (StorageApplyDetails)this.redisTemplate.opsForHash().get(String.valueOf(storageApply.getSaid()), obj) ;
+					count += storageApplyDetails.getNum() ;
+				}
+				
 			}
 			allCount.put(storageApply.getSaid(), count) ;
 			allWarehouse.put(storageApply.getSaid(), this.storageApply.findByWid(storageApply.getWid())) ; 
@@ -103,11 +108,37 @@ public class StorageApplyServiceBackImpl extends AbstractService implements ISto
 		return this.storageApply.doEdit(storageApply) ;
 	}
 	@Override
-	public boolean editStatus(int status, long said) {
+	public boolean submit(int status, long said) {
 		Map<String,Object> map = new HashMap<String,Object>() ;
 		map.put("status", status) ;
 		map.put("said", said) ;
-		return this.storageApply.doEditStatus(map);
+		if(this.storageApply.doEditStatus(map)) {
+			Set<Object> attrs = this.redisTemplate.opsForHash().keys(String.valueOf(said)) ;
+			Iterator<Object> iter = attrs.iterator() ;
+			while(iter.hasNext()) {
+				Object obj = iter.next() ;
+				if(this.redisTemplate.opsForHash().get(String.valueOf(said), obj) instanceof StorageApplyDetails) {
+					if(!this.storageApply.doCreateStorageApplyDetails((StorageApplyDetails)this.redisTemplate.opsForHash().get(String.valueOf(said), obj))) {
+						return false ;
+					} 
+				}
+			}
+			this.redisTemplate.opsForHash().put(String.valueOf(said),"applyDate",new Date()) ;
+			return true ;
+		}else {
+			return false ;
+		}
+	}
+	@Override
+	public boolean reset(int status, long said) {
+		Map<String,Object> map = new HashMap<String,Object>() ;
+		map.put("status", status) ;
+		map.put("said", said) ;
+		if(this.storageApply.doEditStatus(map)) {
+			return this.storageApply.doRemoveBySaid(said) ;
+		}else {
+			return false ;
+		}
 	}
 	@Override
 	public boolean remove(long said) {
@@ -120,7 +151,10 @@ public class StorageApplyServiceBackImpl extends AbstractService implements ISto
 		Set<Object> attrs = this.redisTemplate.opsForHash().keys(String.valueOf(said)) ;
 		Iterator<Object> iter = attrs.iterator() ;
 		while(iter.hasNext()) {
-			goodsTemps.add((StorageApplyDetails)this.redisTemplate.opsForHash().get(String.valueOf(said), iter.next())) ;
+			Object obj = iter.next() ;
+			if(this.redisTemplate.opsForHash().get(String.valueOf(said), obj) instanceof StorageApplyDetails) {
+				goodsTemps.add((StorageApplyDetails)this.redisTemplate.opsForHash().get(String.valueOf(said), obj)) ;
+			}
 		}
 		StorageApply storageApply = this.storageApply.findBySaid(said) ;
 		String address = this.storageApply.findByWid(storageApply.getWid()).getAddress() ;

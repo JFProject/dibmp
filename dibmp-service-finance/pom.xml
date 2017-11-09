@@ -20,6 +20,10 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-redis</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>cn.mldn</groupId>
 			<artifactId>dibmp-api</artifactId>
 		</dependency>
