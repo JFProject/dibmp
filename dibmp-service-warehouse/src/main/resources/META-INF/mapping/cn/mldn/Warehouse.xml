@@ -6,6 +6,28 @@
 		INSERT INTO warehouse(name,pid,cid,wiid,address,area,maximum,photo,note)
 		VALUES (#{name},#{pid},#{cid},#{wiid},#{address},#{area},#{maximum},#{photo},#{note}) ;
 	</insert>
+	<update id="doUpdate" parameterType="Warehouse" >
+		update warehouse 
+		<set>
+			admin=#{admin},pid=#{pid},cid=#{cid},wiid=#{wiid},address=#{address},area=#{area},maximum=#{maximum},photo=#{photo},note=#{note},recorder=#{recorder},currnum=#{currnum},name=#{name}
+		</set> 
+		<where>
+			wid=#{wid}
+		</where>
+	</update>
+	<update id="doUpdateByWid" parameterType="map" >
+		update warehouse 
+		<set>
+			admin=#{admin}
+		</set> 
+		<where>
+			wid=#{wid}
+		</where>
+	</update>
+	<select id="findByName" parameterType="String" resultType="Warehouse">
+		select wid,name,pid,cid,wiid,address,area,maximum,photo,note 
+		from warehouse where name=#{name} ;
+	</select>
 	<select id="findSplit" resultType="Warehouse" parameterType="map">
 		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin 
 		from warehouse 
@@ -24,4 +46,5 @@
 			</if>
 		</where>
 	</select>
+	
 </mapper>

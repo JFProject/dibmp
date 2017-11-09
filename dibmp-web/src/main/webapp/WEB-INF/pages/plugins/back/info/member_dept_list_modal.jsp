@@ -1,4 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="modal fade" id="memberDeptInfo"  tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true" data-keyboard="true">
 	<div class="modal-dialog" style="width: 1000px">
 		<div class="modal-content">
@@ -10,9 +13,9 @@
 					<div class="col-md-5">
 						<select id="did" name="did" class="form-control">
 							<option value="">====== 请选择雇员所在部门 ======</option>
-							<option value="10">开发部</option>
-							<option value="10">市场部</option>
-							<option value="10">财务部</option>
+							<c:forEach items="${allDept }" var="dept">
+								<option value="${dept.did }">${dept.dname }</option>
+							</c:forEach>
 						</select>
 					</div>
 				</div>
@@ -29,19 +32,9 @@
 								<th class="text-center"><strong>操作</strong></th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id = "bod">
 							<tr id="travel-1">
-								<td class="text-center">
-									<img src="upload/member/nophoto.png" style="width:20px;"/> 
-								</td>
-								<td class="text-center" id="memberName">老李</td>
-								<td class="text-center">部门员工</td>
-								<td class="text-center">232902309230</td>
-								<td class="text-center">
-									<button class="btn btn-danger btn-xs" id="addadmin-mldn">
-										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;设置为库管</button>
-								</td>
-							</tr> 
+							</tr>  
 						</tbody>
 					</table>
 				</div>
