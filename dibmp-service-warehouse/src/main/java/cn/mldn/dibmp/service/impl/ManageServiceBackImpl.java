@@ -85,7 +85,11 @@ public class ManageServiceBackImpl extends AbstractService implements IManageSer
 			Goods goods = new Goods() ;
 			goods.setGid(storageApplyDetails.getGid());
 			goods.setLastin(new Date());
-			goods.setStornum(this.manageDAO.findGoodsByGid(storageApplyDetails.getGid()).getStornum() + storageApplyDetails.getNum());
+			if(this.manageDAO.findGoodsByGid(storageApplyDetails.getGid()).getStornum() == null) {
+				goods.setStornum(storageApplyDetails.getNum());
+			}else {
+				goods.setStornum(this.manageDAO.findGoodsByGid(storageApplyDetails.getGid()).getStornum() + storageApplyDetails.getNum());
+			}
 			if(!this.manageDAO.doEditGoodsByGid(goods)) {
 				return false ;
 			}

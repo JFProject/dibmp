@@ -10,7 +10,7 @@ $(function() {
 		if (loadFlag == false) {
 			gid = $("#gid").text() ;
 			$.post("pages/back/admin/goods/goodsStorageInfo.action",{"gid":gid},function(data){
-				console.log(data) ;
+				$('#storageTable').empty() ;
 				for(var i = 0 ; i < data.allStorageRecord.length ; i ++){
 					storageRecord = data.allStorageRecord[i] ;
 					trInfo = $("<tr class='text-primary'> " +

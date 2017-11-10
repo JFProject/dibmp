@@ -8,6 +8,7 @@ $(function(){
 				$("#storageApplyWiid").text(data.wiidName) ;
 				$("#totalProce").text(data.totalPrice) ;
 				$("#storageApplyNote").text(data.storageApply.note) ;
+				$("#detailsTab").empty() ;
 				for(var i = 0 ; i < data.allStorageApplyDetails.length ; i ++){
 					storageApplyDetails = data.allStorageApplyDetails[i] ;
 					trInfo = 	$("<tr class='text-primary'>" +

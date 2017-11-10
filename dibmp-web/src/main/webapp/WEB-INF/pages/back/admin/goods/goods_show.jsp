@@ -73,7 +73,7 @@
 							</div>
 							<div id="contentOne" class="panel-collapse collapse"> 
 								<div class="panel-body">
-									<table class="table table-condensed" id="storageTable">
+									<table class="table table-condensed">
 										<thead>
 											<tr>
 												<th class="text-center" style="width:10%;">入库日期</th> 
@@ -82,7 +82,7 @@
 												<th class="text-center" style="width:10%;">库存数量</th>
 											</tr>
 										</thead>
-										<tbody>
+										<tbody id="storageTable">
 											
 										</tbody>
 									</table>

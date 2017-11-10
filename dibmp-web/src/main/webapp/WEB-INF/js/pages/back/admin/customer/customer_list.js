@@ -25,7 +25,7 @@ $(function(){
 			var data ;
 			cmid = this.id.split("-")[1] ;
 			$.post("pages/back/admin/customer/customer_record.action",{"cmid":cmid},function(data){
-				console.log(data);
+				$("#1044316902").empty() ;
 				for(var i = 0 ; i < data.allCr.length ; i ++){
 					cr = data.allCr[i] ;
 					trInfo = 	$("<tr id='record-1'>"+

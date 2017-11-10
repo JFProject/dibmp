@@ -25,5 +25,6 @@
 		interface="cn.mldn.dibmp.service.IStorageAuditServiceBack" version="${dubbo.interface.version}" />
 	<dubbo:reference id="manageInstance"
 		interface="cn.mldn.dibmp.service.IManageServiceBack" version="${dubbo.interface.version}" />
-			
+	<dubbo:reference id="customerInstance"
+		interface="cn.mldn.dibmp.service.ICustomerServiceBack" version="${dubbo.interface.version}" />
 </beans>

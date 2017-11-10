@@ -34,7 +34,7 @@
 					</table>
 				</div>
 				<div>
-					<table class="table table-condensed table-bordered table-hover" id="detailsTab">
+					<table class="table table-condensed table-bordered table-hover">
 						<thead>
 							<tr>
 								<th class="text-center" style="width:10%;">商品编号</th> 
@@ -45,7 +45,7 @@
 								<th class="text-center" style="width:10%;">总价（￥）</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="detailsTab">
 							
 						</tbody>
 					</table>
