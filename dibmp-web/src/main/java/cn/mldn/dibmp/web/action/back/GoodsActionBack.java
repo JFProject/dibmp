@@ -92,4 +92,10 @@ public class GoodsActionBack extends AbstractAction {
 	public Object getSubtypeByWiid(long wiid) {
 		return this.goodsService.getSubtypeByWiid(wiid) ;
 	}
+	@RequestMapping("goodsStorageInfo")
+	@ResponseBody
+	public Object goodsStorageInfo(long gid) {
+		return this.goodsService.goodsStorageInfo(gid) ;
+	}
+	
 }

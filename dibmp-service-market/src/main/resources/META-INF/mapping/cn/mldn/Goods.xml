@@ -56,4 +56,27 @@
 		SELECT gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag
 		FROM goods WHERE name=#{name}
 	</select>
+	
+	<select id="findStorageRecordByGid" parameterType="long" resultType="StorageRecord">
+		SELECT srid,said,gid,wid,name,num,price,weight,inmid,auditdate 
+		FROM storage_record WHERE gid=#{gid}
+	</select>
+	
+	<select id="findProvinceByPid" parameterType="long" resultType="Province">
+		select pid,title from province where pid=#{pid};
+	</select>
+	
+	<select id="findCityByCid" parameterType="long" resultType="City">
+		select cid,pid,title from city where cid=#{cid};
+	</select>
+	
+	<select id="findMemberByMid" parameterType="String" resultType="Member">
+		SELECT mid,lid,did,name,salary,phone,password,photo,note,hiredate,inmid,locked FROM member WHERE mid=#{mid}
+	</select>
+	
+	<select id="findWarehouseByWid" parameterType="long" resultType="Warehouse">
+		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin
+		from warehouse where wid = #{wid}
+	</select>
+	
 </mapper>

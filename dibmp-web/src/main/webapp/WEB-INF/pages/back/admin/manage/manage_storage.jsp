@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%!
+	public static final String STORAGE_AUDIT_URL = "pages/back/admin/manage/storage_audit.action" ;
+%>
 <jsp:include page="/WEB-INF/pages/plugins/back/back_header.jsp"/>
 <script type="text/javascript" src="js/pages/back/admin/manage/manage_storage.js"></script>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -23,52 +26,74 @@
 					<table class="table table-striped table-bordered table-hover">
 						<tr> 
 							<td style="width:150px;"><strong>入库单编号：</strong></td>
-							<td>1101010</td>
+							<td>${storageApply.said }</td>
 						</tr>
 						<tr> 
-							<td><strong>入库标题：</strong></td>
-							<td>双13备货</td>
+							<td style="width:150px;"><strong>入库标题：</strong></td>
+							<td>${storageApply.title }</td>
 						</tr>
 						<tr>
 							<td><strong>存入仓库名称：</strong></td>
-							<td>北京市 北京市 通州一号仓库</td>
+							<td><span id="showWarehouse-${storageApply.wid }">${provinceName } ${cityName} ${widName }</span></td>
 						</tr>
 						<tr>
 							<td><strong>仓库类型：</strong></td>
-							<td>衣帽服饰</td>
+							<td>${wiidName }</td>
 						</tr>
 						<tr>
-							<td><strong>备注信息：</strong></td>
-							<td>我要上</td>
+							<td><strong>入库商品总价：</strong></td>
+							<td>￥${totalPrice }</td>
+						</tr>
+						<tr>
+							<td><strong>入库单备注信息：</strong></td>
+							<td>${storageApply.note }</td>
 						</tr>
 					</table>
 				</div>
+				<c:if test="${storageApply.status == 2}">
+					<div style="text-align:center">
+						<a href="<%=STORAGE_AUDIT_URL %>?flag=1&said=${storageApply.said}" class="btn btn-primary btn-xs">
+							<span class="glyphicon glyphicon-edit"></span>&nbsp;允许入库</a>
+						<a href="<%=STORAGE_AUDIT_URL %>?flag=2&said=${storageApply.said}" class="btn btn-danger btn-xs">
+							<span class="glyphicon glyphicon-edit"></span>&nbsp;拒绝入库</a>
+					</div>
+				</c:if>
+				<c:if test="${storageApply.status == 0}">
+					<div style="text-align:center;color:red;text-size:20px">用户未提交</div>
+				</c:if>
+				<c:if test="${storageApply.status == 1}">
+					<div style="text-align:center;color:red;text-size:20px">财务未审核</div>
+				</c:if>
+				<c:if test="${storageApply.status == 3}">
+					<div style="text-align:center;color:red;text-size:20px">审核未通过</div>
+				</c:if>
+				<c:if test="${storageApply.status == 4}">
+					<div style="text-align:center;color:red;text-size:20px">订单已完成</div>
+				</c:if>
+				<div>&nbsp;</div>
 				<div>
 					<table class="table table-condensed" id="detailsTab">
 						<thead>
 							<tr>
-								<th class="text-left" style="width:10%;">商品编号</th> 
+								<th class="text-center" style="width:10%;">商品编号</th> 
 								<th class="text-left" style="width:40%;">商品名称</th> 
-								<th class="text-left" style="width:10%;">入库数量</th>
-								<th class="text-left" style="width:10%;">商品单价（元）</th>
-								<th class="text-left" style="width:10%;">单位重量（g）</th>
-								<th class="text-left" style="width:20%;">操作</th>
+								<th class="text-center" style="width:10%;">入库数量</th>
+								<th class="text-center" style="width:15%;">商品单价（￥）</th>
+								<th class="text-center" style="width:15%;">单位重量（g）</th>
+								<th class="text-center" style="width:10%;">总价（￥）</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr id="dettr-1" class="text-success">
-								<td>100001</td>
-								<td>衣服</td>
-								<td>50</td>
-								<td>39.2</td>
-								<td>200</td>
-								<td>
-									<button id="access-1" class="btn btn-primary btn-xs">
-										<span class="glyphicon glyphicon-edit"></span>&nbsp;允许入库</button>
-									<button id="denied-1" class="btn btn-danger btn-xs">
-										<span class="glyphicon glyphicon-edit"></span>&nbsp;拒绝入库</button>
-								</td>
-							</tr>
+							<c:forEach items="${allStorageApplyDetails }" var="storageApplyDetails">
+								<tr class="text-primary">
+									<td class="text-center">${storageApplyDetails.gid}</td>
+									<td class="text-left">${storageApplyDetails.name}</td>
+									<td class="text-center">${storageApplyDetails.num}</td>
+									<td class="text-center">${storageApplyDetails.price}</td>
+									<td class="text-center">${storageApplyDetails.weight}</td>
+									<td class="text-center">${price[storageApplyDetails.sadid] }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 				</div>

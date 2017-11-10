@@ -26,7 +26,7 @@
 						<table class="table table-condensed" >
 							<tr>
 								<td><strong>商品编号：</strong></td> 
-								<td><span>${goods.gid }</span></td>
+								<td><span id="gid">${goods.gid }</span></td>
 								<td><strong>商品图片：</strong></td>
 							</tr>
 							<tr>
@@ -34,15 +34,15 @@
 								<td><span>${goods.name }</span></td>
 								<td rowspan="7"><img src="${authPhoto }" style="height:300px;"></td>
 							</tr>
-							<tr>
+							<!-- <tr>
 								<td><strong>入库次数：</strong></td>
 								<td></td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td><strong>商品库存量：</strong></td>
-								<td>${goods.stornum }（
-									<button id="storage-1" class="btn btn-danger btn-xs">
-										<span class="glyphicon glyphicon-edit"></span>&nbsp;库存详情</button>）</td>
+								<td>${goods.stornum }
+									<!-- （<button id="storage-1" class="btn btn-danger btn-xs">
+										<span class="glyphicon glyphicon-edit"></span>&nbsp;库存详情</button>） --></td>
 							</tr>
 							<tr>
 								<td><strong>当前商品价格（￥）：</strong></td>
@@ -54,7 +54,7 @@
 							</tr>
 							<tr>
 								<td><strong>最后入库日期：</strong></td>
-								<td>${goods.lastin }</td>
+								<td><fmt:formatDate pattern="yyyy-MM-dd" value="${goods.lastin }" /></td>
 							</tr>
 							<tr>
 								<td><strong>备注信息：</strong></td>
@@ -73,24 +73,17 @@
 							</div>
 							<div id="contentOne" class="panel-collapse collapse"> 
 								<div class="panel-body">
-									<table class="table table-condensed">
+									<table class="table table-condensed" id="storageTable">
 										<thead>
 											<tr>
 												<th class="text-center" style="width:10%;">入库日期</th> 
 												<th class="text-left" style="width:40%;">仓库</th> 
 												<th class="text-center" style="width:10%;">入库人员</th> 
-												<th class="text-center" style="width:10%;">审核人员</th> 
 												<th class="text-center" style="width:10%;">库存数量</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="text-primary">
-												<td class="text-center">2010-10-10</td>
-												<td class="text-left">北京 北京 通州一号仓库</td>
-												<td class="text-center"><span id="mid-admin" style="cursor:pointer;">老李</span></td>
-												<td class="text-center"><span id="mid-admin" style="cursor:pointer;">老张</span></td>
-												<td class="text-center">200</td>
-											</tr>
+											
 										</tbody>
 									</table>
 								</div>

@@ -47,8 +47,13 @@ $(function(){
 
 	$("#pid").on("change",function(){
 		id = $(this).val() ;
-		$("#cid").empty() ;
 		if(id != ""){
+			$("#cid").empty() ;
+			$("#cid").append("<option value=''>====== 请选择所在城市 ======</option>") ;
+			$("#wiid").empty() ;
+			$("#wiid").append("<option value=''>====== 请选择库存商品类型 ======</option>") ;
+			$("#wid").empty() ;
+			$("#wid").append("<option value=''>====== 请选择要存储的仓库  ======</option>") ;
 			$.post("pages/back/admin/storage/getCity.action",{"pid":id},function(data){
 				for(var i = 0 ; i < data.length ; i++){
 					$("#cid").append("<option value=" + data[i].cid + ">" + data[i].title + "</option>") ;
@@ -59,11 +64,32 @@ $(function(){
 		}
 	}) ;
 	
+	$("#cid").on("change",function(){
+		cid = $(this).val() ;
+		pid = $("#pid option:selected").val() ;
+		if(cid != "" && pid != ""){
+			$("#wiid").empty() ;
+			$("#wiid").append("<option value=''>====== 请选择库存商品类型 ======</option>") ;
+			$("#wid").empty() ;
+			$("#wid").append("<option value=''>====== 请选择要存储的仓库  ======</option>") ;
+			$.post("pages/back/admin/storage/getWiid.action",{"pid":pid,"cid":cid},function(data){
+				for(var i = 0 ; i < data.length ; i++){
+					$("#wiid").append("<option value=" + data[i].wiid + ">" + data[i].title + "</option>") ;
+				}
+			},"json") ;
+		}else{
+			$("#wiid").append("<option value=''>====== 请选择库存商品类型 ======</option>") ;
+		}
+	}) ;
+	
 	$("#wiid").on("change",function(){
-		id = $(this).val() ;
-		$("#wid").empty() ;
-		if(id != ""){
-			$.post("pages/back/admin/storage/getWarehouse.action",{"wiid":id},function(data){
+		wiid = $(this).val() ;
+		pid = $("#pid option:selected").val() ;
+		cid = $("#cid option:selected").val() ;
+		if(wiid != "" && pid != "" && cid != ""){
+			$("#wid").empty() ;
+			$("#wid").append("<option value=''>====== 请选择要存储的仓库  ======</option>") ;
+			$.post("pages/back/admin/storage/getWarehouse.action",{"wiid":wiid,"pid":pid,"cid":cid},function(data){
 				for(var i = 0 ; i < data.length ; i++){
 					$("#wid").append("<option value=" + data[i].wid + ">" + data[i].name + "</option>") ;
 				}

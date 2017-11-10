@@ -5,30 +5,39 @@ import java.util.Map;
 
 import cn.mldn.dibmp.vo.City;
 import cn.mldn.dibmp.vo.Goods;
+import cn.mldn.dibmp.vo.Province;
 import cn.mldn.dibmp.vo.StorageApply;
 import cn.mldn.dibmp.vo.StorageApplyDetails;
 import cn.mldn.dibmp.vo.Warehouse;
+import cn.mldn.dibmp.vo.Witem;
 
 public interface IStorageApplyServiceBack {
 	/**
-	 * 入库申请前省份和商品类型的列表显示
-	 * @return 以map形式返回
-	 * 1、key = allProvince，value = 所有的省份信息
-	 * 2、key = allWitem，value = 所有的商品类型
+	 * 入库申请前省份列表显示
+	 * @return 有仓库的省份
 	 */
-	public Map<String,Object> addPre() ;
+	public List<Province> addPre() ;
 	/**
-	 * 根据省份编号查找对应的所有城市信息
+	 * 根据省份编号查找有仓库的城市信息
 	 * @param pid 省份编号
 	 * @return 城市信息
 	 */
 	public List<City> getCity(long pid) ;
 	/**
+	 * 根据省份编号城市编号查找仓库的类型
+	 * @param pid 省份编号 
+	 * @param cid 城市编号
+	 * @return 仓库类型
+	 */
+	public List<Witem> getWiid(long pid,long cid) ;
+	/**
 	 * 根据商品类型找到所有的仓库
 	 * @param wiid 商品类型
+	 * @param pid 省份编号
+	 * @param cid 城市编号
 	 * @return 对应的所有的仓库
 	 */
-	public List<Warehouse> getWarehouse(long wiid) ;
+	public List<Warehouse> getWarehouse(long wiid, long pid,long cid) ;
 	/**
 	 * 入库申请单
 	 * @param storageApply 申请单

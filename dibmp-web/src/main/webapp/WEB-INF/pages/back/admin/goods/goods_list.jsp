@@ -47,8 +47,8 @@
 								<td class="text-left"><a href="<%=GOODS_SHOW_URL%>?gid=${goods.gid}" title="查看商品详情">${goods.name }</a></td>
 								<td class="text-center">${goods.price } ￥</td>
 								<td class="text-center">${goods.weight} g</td>
-								<td class="text-center">${goods.lastin }</td>
-								<td class="text-center"><span id="storage-${goods.gid }" style="cursor:pointer;">${goods.stornum }</span></td>
+								<td class="text-center"><fmt:formatDate pattern="yyyy-MM-dd" value="${goods.lastin }"/></td>
+								<td class="text-center"><span id="storage-${goods.gid }" >${goods.stornum }</span></td>
 								<td class="text-center"><span id="mid-${goods.recorder }" style="cursor:pointer;">${memberName[goods.recorder] }</span></td> 
 								<td class="text-left">
 									<a  href="<%=GOODS_EDIT_URL %>?gid=${goods.gid}" class="btn btn-primary btn-xs">

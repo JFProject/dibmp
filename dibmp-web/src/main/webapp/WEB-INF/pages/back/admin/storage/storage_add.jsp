@@ -67,9 +67,6 @@
 								<div class="col-md-5">
 									<select id="wiid" name="wiid" class="form-control">
 										<option value="">====== 请选择库存商品类型 ======</option>
-										<c:forEach items="${allWitem }" var="witem">
-											<option value="${witem.wiid }">${witem.title }</option>
-										</c:forEach>
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->

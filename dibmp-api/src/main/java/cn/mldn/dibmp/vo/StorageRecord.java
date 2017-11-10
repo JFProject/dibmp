@@ -1,18 +1,26 @@
 package cn.mldn.dibmp.vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 public class StorageRecord implements Serializable {
 	private Long srid;
 	private Long said;
 	private Long gid;
+	private Long wid;
 	private String name;
 	private Integer num;
 	private Double price;
 	private Double weight;
-	private Integer status;
 	private String inmid;
+	private Date auditDate;
+	public void setWid(Long wid) {
+		this.wid = wid;
+	}
+	public Long getWid() {
+		return wid;
+	}
 	public Long getSrid() {
 		return srid;
 	}
@@ -55,21 +63,17 @@ public class StorageRecord implements Serializable {
 	public void setWeight(Double weight) {
 		this.weight = weight;
 	}
-	public Integer getStatus() {
-		return status;
-	}
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 	public String getInmid() {
 		return inmid;
 	}
 	public void setInmid(String inmid) {
 		this.inmid = inmid;
 	}
-	@Override
-	public String toString() {
-		return "Storage_record [srid=" + srid + ", said=" + said + ", gid=" + gid + ", name=" + name + ", num=" + num
-				+ ", price=" + price + ", weight=" + weight + ", status=" + status + ", inmid=" + inmid + "]";
+	public Date getAuditDate() {
+		return auditDate;
 	}
+	public void setAuditDate(Date auditDate) {
+		this.auditDate = auditDate;
+	}
+	
 }

@@ -127,6 +127,7 @@ public class StorageAuditServiceBackImpl extends AbstractService implements ISto
 		map.put("status", status) ;
 		map.put("said", said) ;
 		if(this.storageAuditDAO.doEditStatus(map)) {
+			this.redisTemplate.opsForHash().put(String.valueOf(said), "auditDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 			this.redisTemplate.opsForHash().put(String.valueOf(said), "auditMid", mid) ;
 			return true ;
 		}
@@ -136,7 +137,7 @@ public class StorageAuditServiceBackImpl extends AbstractService implements ISto
 	public Map<String, Object> listHistory(long currentPage,int lineSize,String column,String keyWord) {
 		Map<String,Object> map = new HashMap<String,Object>() ;
 		Map<Long,String> allAppName = new HashMap<Long,String>() ;
-		Map<Long,String> allAppDate = new HashMap<Long,String>() ;
+		Map<Long,String> allAuditDate = new HashMap<Long,String>() ;
 		Map<Long,Integer> allCount = new HashMap<Long,Integer>() ;
 		Map<Long,Double> allPrice = new HashMap<Long,Double>() ;
 		Map<Long,String> allWarehouseName = new HashMap<Long,String>() ;
@@ -167,14 +168,14 @@ public class StorageAuditServiceBackImpl extends AbstractService implements ISto
 			allCityName.put(storageApply.getSaid(), this.storageAuditDAO.findCityByCid(storageApply.getCid()).getTitle()) ;
 			allWarehouseName.put(storageApply.getSaid(), this.storageAuditDAO.findWarehouseByWid(storageApply.getWid()).getName()) ;
 			allAppName.put(storageApply.getSaid(), appName) ;
-			allAppDate.put(storageApply.getSaid(), new SimpleDateFormat("yyyy-MM-dd").format((Date)this.redisTemplate.opsForHash().get(String.valueOf(storageApply.getSaid()), "applyDate"))) ;
+			allAuditDate.put(storageApply.getSaid(), (String)this.redisTemplate.opsForHash().get(String.valueOf(storageApply.getSaid()), "auditDate")) ;
 			allCount.put(storageApply.getSaid(), count) ;
 			allPrice.put(storageApply.getSaid(), MyMath.round(price, 1)) ;
 		}
 		map.put("allStorageApplyDetails", allStorageApply) ;
 		map.put("allRecorders",allRecorders) ;
 		map.put("allAppName", allAppName) ;
-		map.put("allAppDate", allAppDate) ;
+		map.put("allAuditDate", allAuditDate) ;
 		map.put("allCount", allCount) ;
 		map.put("allPrice", allPrice) ;
 		map.put("allWarehouseName", allWarehouseName) ;

@@ -442,14 +442,14 @@
 			</resource>
 		</resources>
 		<plugins>	<!-- 配置项目所需要的开发插件 -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>${javadoc.version}</version>
 				<configuration>
 					<encode>${project.build.sourceEncoding}</encode>
 				</configuration>
-				<executions>	<!-- 进行执行配置 -->
+				<executions>	进行执行配置
 					<execution>
 						<id>javadocs</id>
 						<goals>
@@ -457,7 +457,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

@@ -25,16 +25,16 @@
 					<form class="form-horizontal" action="<%=STORAGE_INPUT_URL%>" id="myform" method="post">
 						<fieldset>
 							<!-- 定义输入表单样式，其中id主要用于设置颜色样式 -->
-							<div class="form-group" id="sidDiv">
+							<div class="form-group" id="saidDiv">
 								<!-- 定义表单提示文字 -->
-								<label class="col-md-3 control-label" for="sid">入库单号：</label>
+								<label class="col-md-3 control-label" for="said">入库单号：</label>
 								<div class="col-md-5">
 									<!-- 定义表单输入组件 -->
-									<input type="text" id="sid" name="sid" class="form-control"
+									<input type="text" id="said" name="said" class="form-control"
 										placeholder="请输入申请单标题名称">
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
-								<div class="col-md-4" id="titleMsg"></div>
+								<div class="col-md-4" id="saidMsg"></div>
 							</div>
 							<div class="form-group">
 								<div class="col-md-5 col-md-offset-3">

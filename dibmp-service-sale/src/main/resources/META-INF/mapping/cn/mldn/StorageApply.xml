@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.mldn.dibmp.dao.IStorageApplyDAO">
+	<select id="findAllPidByWarehouse" resultType="long">
+		select distinct(pid) from warehouse;
+	</select>
+	<select id="findProvinceByPid" parameterType="long" resultType="Province">
+		select pid,title from province where pid=#{pid};
+	</select>
+	<select id="findCidByPid" parameterType="long" resultType="long">
+		select distinct(cid) from warehouse where pid=#{pid};
+	</select>
+	<select id="findCityByCid" parameterType="long" resultType="City">
+		select cid,pid,title from city where cid=#{cid};
+	</select>
 	<select id="findAllProvince" resultType="Province">
 		select pid,title from province
 	</select>
@@ -14,6 +26,13 @@
 	<select id="findAllByWiid" parameterType="long" resultType="warehouse">
 		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin
 		from warehouse where wiid = #{wiid}
+	</select>
+	<select id="findAllByWiidPidCid" parameterType="Map" resultType="warehouse">
+		select wid,name,pid,cid,wiid,address,area,maximum,currnum,photo,note,recorder,admin
+		from warehouse where wiid = #{wiid} and pid = #{pid} and cid = #{cid}
+	</select>
+	<select id="findAllByPidCid" parameterType="Map" resultType="long">
+		select distinct(wiid) from warehouse where pid = #{pid} and cid = #{cid}
 	</select>
 	<insert id="doCreate" parameterType="StorageApply">
 		insert into storage_apply(title,pid,cid,wiid,wid,note,status,appmid)

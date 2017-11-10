@@ -22,19 +22,28 @@ public class StorageActionBack extends AbstractAction {
 	@RequestMapping("add_pre")
 	public ModelAndView addPre() {
 		ModelAndView mav = new ModelAndView(super.getPage("storage.add.page"));
-		mav.addAllObjects(this.storageApplyService.addPre()) ;
+		mav.addObject("allProvince", this.storageApplyService.addPre()) ;
 		return mav;
 	}
+	
 	@RequestMapping("getCity")
 	@ResponseBody
 	public Object getCity(long pid) {
-		return this.storageApplyService.getCity(pid) ;
+		return this.storageApplyService.getCity(pid)  ;
 	}
+	
+	@RequestMapping("getWiid")
+	@ResponseBody
+	public Object getWiid(long pid, long cid) {
+		return this.storageApplyService.getWiid(pid,cid) ;
+	}
+	
 	@RequestMapping("getWarehouse")
 	@ResponseBody
-	public Object getWarehouse(long wiid) {
-		return this.storageApplyService.getWarehouse(wiid) ;
+	public Object getWarehouse(long wiid, long pid, long cid) {
+		return this.storageApplyService.getWarehouse(wiid,pid,cid) ;
 	}
+	
 	@RequestMapping("add")
 	public ModelAndView add(StorageApply storageApply) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
@@ -47,12 +56,14 @@ public class StorageActionBack extends AbstractAction {
 		}
 		return mav;
 	}
+	
 	@RequestMapping("edit_pre")
 	public ModelAndView editPre(long said) {
 		ModelAndView mav = new ModelAndView(super.getPage("storage.edit.page"));
 		mav.addAllObjects(this.storageApplyService.editPre(said)) ;
 		return mav;
 	}
+	
 	@RequestMapping("edit")
 	public ModelAndView edit(StorageApply storageApply) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
@@ -65,12 +76,14 @@ public class StorageActionBack extends AbstractAction {
 		}
 		return mav;
 	}
+	
 	@RequestMapping("list_details") 
 	public ModelAndView listDetails(long said) {
 		ModelAndView mav = new ModelAndView(super.getPage("storage.list.details.page"));
 		mav.addAllObjects(this.storageApplyService.listDetails(said)) ;
  		return mav;
 	}
+	
 	@RequestMapping("list_myself") 
 	public ModelAndView listMyself() {
 		SplitPageUtil spu = new SplitPageUtil("申请标题:title", super.getPage("storage.list.myself.action")) ;
@@ -79,6 +92,7 @@ public class StorageActionBack extends AbstractAction {
 		mav.addAllObjects(this.storageApplyService.getByMyself(spu.getCurrentPage(), spu.getLineSize(), spu.getColumn(), spu.getKeyWord(), mid)) ;
 		return mav;
 	}
+	
 	@RequestMapping("submit") 
 	public ModelAndView submit(long said) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
@@ -90,6 +104,7 @@ public class StorageActionBack extends AbstractAction {
 		}
 		return mav;
 	}
+	
 	@RequestMapping("reset")
 	public ModelAndView reset(long said) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
@@ -101,6 +116,7 @@ public class StorageActionBack extends AbstractAction {
 		}
 		return mav;
 	}
+	
 	@RequestMapping("remove") 
 	public ModelAndView remove(long said) {
 		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
@@ -111,16 +127,19 @@ public class StorageActionBack extends AbstractAction {
 		}
 		return mav;
 	}
+	
 	@RequestMapping("getGoodsByGid")
 	@ResponseBody
 	public Object getGoodsByGid(long gid) {
 		return this.storageApplyService.getGoodsByGid(gid) ;
 	}
+	
 	@RequestMapping("addGoodsTemp")
 	@ResponseBody
 	public Object addGoodsTemp(long said,StorageApplyDetails storageApplyDetails) {
 		return this.storageApplyService.addGoodsTemp(said, storageApplyDetails);
 	}
+	
 	@RequestMapping("deleteGoodsTemp")
 	@ResponseBody
 	public Object deleteGoodsTemp(long said,long gid) {

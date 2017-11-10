@@ -12,6 +12,29 @@ import cn.mldn.dibmp.vo.Warehouse;
 import cn.mldn.dibmp.vo.Witem;
 
 public interface IStorageApplyDAO {
+	/**
+	 * 查找有仓库的省份
+	 * @return 省份id
+	 */
+	public List<Long> findAllPidByWarehouse() ;
+	/**
+	 * 根据省份编号查找省份信息
+	 * @param pid 省份编号
+	 * @return 省份信息
+	 */
+	public Province findProvinceByPid(Long pid) ;
+	/**
+	 * 根据省份编号查找有仓库的城市
+	 * @param pid 省份编号
+	 * @return 有仓库的城市编号
+	 */
+	public List<Long> findCidByPid(long pid) ;
+	/**
+	 * 根据城市编号查找城市信息
+	 * @param cid 城市编号
+	 * @return 城市信息
+	 */
+	public City findCityByCid(Long cid) ;
 	public List<Province> findAllProvince() ;
 	public List<Witem> findAllWitem() ;
 	public List<City> findCityByPid(Long pid) ;
@@ -21,6 +44,18 @@ public interface IStorageApplyDAO {
 	 * @return 对应的所有仓库信息
 	 */
 	public List<Warehouse> findAllByWiid(Long wiid) ;
+	/**
+	 * 根据商品分类省份城市查找对应的所有仓库信息
+	 * @param params 商品分类省份城市
+	 * @return 对应的所有仓库信息
+	 */
+	public List<Warehouse> findAllByWiidPidCid(Map<String,Long> params) ;
+	/**
+	 * 根据省份城市查找对应的所有仓库信息
+	 * @param params 省份城市
+	 * @return 对应的所有仓库信息
+	 */
+	public List<Long> findAllByPidCid(Map<String,Long> params) ;
 	public boolean doCreate(StorageApply storageApply) ;
 	/**
 	 * 根据入库申请单标题查找入库申请信息

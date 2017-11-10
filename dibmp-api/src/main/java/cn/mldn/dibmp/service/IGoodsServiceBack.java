@@ -59,4 +59,17 @@ public interface IGoodsServiceBack {
 	 * 1、key = goods，value = 商品信息
 	 */
 	public Map<String,Object> show(long gid) ;
+	/**
+	 * 商品库存详情列表显示
+	 * @param gid 商品编号
+	 * @return 以map形式返回
+	 * 1、key = storageRecord ，value = 入库单详情
+	 * 2、key = province ，value = 省份信息
+	 * 3、key = city ，value = 城市信息
+	 * 4、key = warehouseName ，value = 仓库地址
+	 * 5、key = applyMember ，申请人
+	 * 6、key = auditMember ，审核人
+	 * 7、key = inMember ，入库人
+	 */
+	public Map<String,Object> goodsStorageInfo(long gid) ;
 }

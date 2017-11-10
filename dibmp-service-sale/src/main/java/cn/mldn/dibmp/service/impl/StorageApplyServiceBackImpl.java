@@ -30,19 +30,49 @@ public class StorageApplyServiceBackImpl extends AbstractService implements ISto
 	@Resource
 	private RedisTemplate<String,Object> redisTemplate ;
 	@Override
-	public Map<String, Object> addPre() {
-		Map<String,Object> map = new HashMap<String,Object>() ;
-		map.put("allProvince", this.storageApply.findAllProvince()) ;
-		map.put("allWitem", this.storageApply.findAllWitem()) ;
-		return map;
+	public List<Province> addPre() {
+		List<Province> list = new ArrayList<Province>() ;
+		List<Long> allPid = this.storageApply.findAllPidByWarehouse() ;
+		Iterator<Long> iter = allPid.iterator() ;
+		while(iter.hasNext()) {
+			Long pid = iter.next() ;
+			if(pid != null) {
+				list.add(this.storageApply.findProvinceByPid(pid)) ;
+			}
+		}
+		return list;
 	}
 	@Override
 	public List<City> getCity(long pid) {
-		return this.storageApply.findCityByPid(pid);
+		List<City> list = new ArrayList<City>() ;
+		List<Long> allCid = this.storageApply.findCidByPid(pid) ;
+		Iterator<Long> iter = allCid.iterator() ;
+		while(iter.hasNext()) {
+			list.add(this.storageApply.findCityByCid(iter.next())) ;
+		}
+		return list ;
 	}
 	@Override
-	public List<Warehouse> getWarehouse(long wiid) {
-		return this.storageApply.findAllByWiid(wiid);
+	public List<Witem> getWiid(long pid, long cid) {
+		Map<String,Long> params = new HashMap<String,Long>() ;
+		List<Witem> list = new ArrayList<Witem>() ;
+		params.put("pid",pid) ;
+		params.put("cid",cid) ;
+		List<Long> allWarehouse = this.storageApply.findAllByPidCid(params);
+		Iterator<Long> iter = allWarehouse.iterator() ;
+		while(iter.hasNext()) {
+			Long wiid = iter.next() ;
+			list.add(this.storageApply.findWitemByWiid(wiid)) ;
+		}
+		return list ;
+	}
+	@Override
+	public List<Warehouse> getWarehouse(long wiid,long pid,long cid) {
+		Map<String,Long> params = new HashMap<String,Long>() ;
+		params.put("wiid", wiid) ;
+		params.put("pid",pid) ;
+		params.put("cid",cid) ;
+		return this.storageApply.findAllByWiidPidCid(params);
 	}
 	@Override
 	public boolean add(StorageApply storageApply) {
