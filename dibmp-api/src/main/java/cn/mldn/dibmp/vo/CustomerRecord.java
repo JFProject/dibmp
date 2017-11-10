@@ -6,20 +6,32 @@ import java.util.Date;
 @SuppressWarnings("serial")
 public class CustomerRecord implements Serializable {
 	private Long crid;
-	private String cmid;
+	private String recordername;
+	private Long cmid;
 	private Date cdate;
 	private Long criid;
 	private String note;
+	@Override
+	public String toString() {
+		return "CustomerRecord [crid=" + crid + ", recordername=" + recordername + ", cmid=" + cmid + ", cdate=" + cdate
+				+ ", criid=" + criid + ", note=" + note + "]";
+	}
 	public Long getCrid() {
 		return crid;
 	}
 	public void setCrid(Long crid) {
 		this.crid = crid;
 	}
-	public String getCmid() {
+	public String getRecordername() {
+		return recordername;
+	}
+	public void setRecordername(String recordername) {
+		this.recordername = recordername;
+	}
+	public Long getCmid() {
 		return cmid;
 	}
-	public void setCmid(String cmid) {
+	public void setCmid(Long cmid) {
 		this.cmid = cmid;
 	}
 	public Date getCdate() {
@@ -40,9 +52,5 @@ public class CustomerRecord implements Serializable {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	@Override
-	public String toString() {
-		return "Customer_record [crid=" + crid + ", cmid=" + cmid + ", cdate=" + cdate + ", criid=" + criid + ", note="
-				+ note + "]";
-	}
+
 }

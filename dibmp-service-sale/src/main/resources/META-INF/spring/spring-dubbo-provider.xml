@@ -18,6 +18,8 @@
 	<!-- 声明需要暴露的服务接口 -->
 	<dubbo:service interface="cn.mldn.dibmp.service.IStorageApplyServiceBack"
 		ref="storageApplyServiceBackImpl" version="${dubbo.interface.version}" />
+	<dubbo:service interface="cn.mldn.dibmp.service.ICustomerServiceBack"
+		ref="customerServiceBackImpl" version="${dubbo.interface.version}" />
 </beans>
 
 

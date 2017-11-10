@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/pages/plugins/back/back_header.jsp"/>
 <%!
-	public static final String CUSTOMER_ADD_URL = "" ;
+	public static final String CUSTOMER_ADD_URL = "pages/back/admin/customer/add.action" ;
 %>
 <script type="text/javascript" src="js/pages/back/admin/customer/customer_add.js"></script>
 <body class="hold-transition skin-blue sidebar-mini"> 
@@ -40,14 +40,12 @@
 								<!-- 定义表单提示文字 -->
 								<label class="col-md-3 control-label" for="tid">客户来源：</label>
 								<div class="col-md-5">
-									<select id="tid" name="tid" class="form-control">
+									<select id="tid" name="csid" class="form-control">
 										<option value="">====== 请选择客户信息来源 ======</option>
-										<option value="1">电话咨询</option>
-										<option value="2">上门访问</option>
-										<option value="3">广告渠道</option>
-										<option value="4">销售关系</option>
-										<option value="5">客户介绍</option>
-										<option value="6">其他</option> 
+									<c:forEach items="${AllCsources}" var="source">
+										<option value="${source.csid}" name="${source.csid}">${source.title}</option>
+									</c:forEach>	
+										
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -70,9 +68,9 @@
 								<div class="col-md-5">
 									<select id="pid" name="pid" class="form-control">
 										<option value="">====== 请选择所在省份 ======</option>
-										<option value="1">河北省</option>
-										<option value="2">山西部</option>
-										<option value="3">广东省</option>
+										<c:forEach items="${allProvinces}" var="source">
+										<option value="${source.pid}">${source.title}</option>
+										</c:forEach>	
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
@@ -107,12 +105,14 @@
 								<!-- 定义表单提示文字 -->
 								<label class="col-md-3 control-label" for="lev">客户重要性：</label>
 								<div class="col-md-5">
-									<select id="lev" name="lev" class="form-control">
+									<select id="lev" name="ciid" class="form-control">
 										<option value="">====== 请选择客户重要性 ======</option>
-										<option value="1">潜在客户</option>
-										<option value="2">大单客户</option>
-										<option value="3">重要客户</option>
+										<c:forEach items="${allCitemTitles}" var="source">
+										
+										<option value="${source.ciid}">${source.title}</option>
+										</c:forEach>
 									</select>
+									
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="levMsg"></div>

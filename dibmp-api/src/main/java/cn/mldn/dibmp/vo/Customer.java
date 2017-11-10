@@ -7,7 +7,7 @@ import java.util.Date;
 public class Customer implements Serializable {
 	private Long cuid;
 	private String name;
-	private String photo;
+	private String phone;
 	private Long pid;
 	private Long cid;
 	private String address;
@@ -17,6 +17,12 @@ public class Customer implements Serializable {
 	private Long csid;
 	private String note;
 	private String recorder;
+	@Override
+	public String toString() {
+		return "Customer [cuid=" + cuid + ", name=" + name + ", phone=" + phone + ", pid=" + pid + ", cid=" + cid
+				+ ", address=" + address + ", indate=" + indate + ", connum=" + connum + ", ciid=" + ciid + ", csid="
+				+ csid + ", note=" + note + ", recorder=" + recorder + "]";
+	}
 	public Long getCuid() {
 		return cuid;
 	}
@@ -29,11 +35,11 @@ public class Customer implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhoto() {
-		return photo;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public Long getPid() {
 		return pid;
@@ -89,10 +95,5 @@ public class Customer implements Serializable {
 	public void setRecorder(String recorder) {
 		this.recorder = recorder;
 	}
-	@Override
-	public String toString() {
-		return "Customer [cuid=" + cuid + ", name=" + name + ", photo=" + photo + ", pid=" + pid + ", cid=" + cid
-				+ ", address=" + address + ", indate=" + indate + ", connum=" + connum + ", ciid=" + ciid + ", csid="
-				+ csid + ", note=" + note + ", recorder=" + recorder + "]";
-	}
+	
 }

@@ -69,6 +69,22 @@ $(function(){
 			}
 		}
 	});
+	$(pid).on("change",function(){
+		pid = $(this).val() ;
+		if(pid != ""){
+			$.post("pages/back/admin/customer/getCity.action",{"pid":pid},function(data){
+				$("#cid").empty() ;
+				console.log(data);
+				for(var i = 0 ; i < data.length ; i++) {
+					temp = data[i] ;
+					$("#cid").append("<option value=" + temp.cid + ">" + temp.title + "</option>") ;
+				}
+			},"json");
+		}else{
+			$("#cid").empty() ;
+			$("#cid").append("<option value=''>====== 请选择商品所属子分类 ======</option>") ;
+		}
+	})
 	$(cid).on("change",function() {
 		handleAddress() ;	// 处理地址 
 	}) ;
