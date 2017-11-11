@@ -20,6 +20,8 @@
 		ref="storageApplyServiceBackImpl" version="${dubbo.interface.version}" />
 	<dubbo:service interface="cn.mldn.dibmp.service.ICustomerServiceBack"
 		ref="customerServiceBackImpl" version="${dubbo.interface.version}" />
+	<dubbo:service interface="cn.mldn.dibmp.service.IDistributionServiceBack"
+		ref="distributionBackImpl" version="${dubbo.interface.version}" />
 </beans>
 
 

@@ -11,6 +11,12 @@
 	<select id="getCitemTitle"  resultType="Citem">
 		SELECT ciid,title FROM citem;
 	</select>
+	<select id="findById"  resultType="Customer" parameterType="Long">
+		SELECT cuid,name,phone,pid,cid,address,indate,connum,ciid,csid,note,recorder FROM customer where cuid = #{cuid};
+	</select>
+	<select id="findByGid"  resultType="Goods" parameterType="Long">
+		SELECT gid,name,wiid,stid,price,weight,photo,note,lastin,stornum,recorder,delflag FROM goods where gid = #{gid};
+	</select>
 	<select id="findCityByPid" parameterType="Long"  resultType="City">
 		SELECT cid,pid,title FROM city where pid = #{pid};
 	</select>

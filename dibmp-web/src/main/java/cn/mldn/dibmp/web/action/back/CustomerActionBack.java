@@ -71,17 +71,30 @@ public class CustomerActionBack extends AbstractAction {
 	}
 	@RequestMapping("list") 
 	public ModelAndView list() {
-		
 		SplitPageUtil spu = new SplitPageUtil("客户姓名:name|联系电话:phone|客户地址:address", super.getPage("customer.list.action")) ;
 		ModelAndView mav = new ModelAndView(super.getPage("customer.list.page"));
-		mav.addAllObjects(this.customerService.list(spu.getCurrentPage(), spu.getLineSize(), spu.getColumn(), spu.getKeyWord())) ;
+		String mid = (String)super.getRequest().getSession().getAttribute("mid");
+		mav.addAllObjects(this.customerService.list(spu.getCurrentPage(), spu.getLineSize(), spu.getColumn(), spu.getKeyWord(),mid)) ;
 		return mav;
 	}
 	@RequestMapping("getCity")
-	@ResponseBody
 	public Object getAllCity(long pid) {
 		System.err.println();
 		return customerService.getCityTitle(pid);
+		
+	}
+	@RequestMapping("band")
+	public ModelAndView band(long cid) {
+		String mid = (String)super.getRequest().getSession().getAttribute("mid");
+		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
+		super.setMsgAndUrl(mav, "customer.list.action", "vo.edit.success", TITLE);
+
+		if(this.customerService.band(cid, mid)) {
+			super.setMsgAndUrl(mav, "customer.list.action", "vo.add.success", TITLE);
+		}else {
+			super.setMsgAndUrl(mav, "customer.list.action", "vo.add.failure", TITLE);
+		}
+		return mav;
 	}
 	@RequestMapping("customer_record")
 	@ResponseBody

@@ -43,12 +43,16 @@ $(function(){
 			},"json") ;
 		}) ;
 	}) ;
-	$("button[id^=out-]").each(function(){
-		$(this).on("click",function(){
-			cid = this.id.split("-")[1] ;
-			operateAlert(true,"出库客户追加成功！","出库客户追加失败！") ;
-		}) ;
-	}) ;
+//	$("button[id^=out-]").each(function(){
+//		$(this).on("click",function(){
+//			cid = this.id.split("-")[1] ;
+//			
+//			console.log(cid) ;
+//			
+//			operateAlert(true,"客户订单追加成功！","客户订单追加失败！") ;
+//		}) ;
+//	}) ;
+
 	$("button[id^=input-]").each(function(){
 		$(this).on("click",function(){
 			cmid = this.id.split("-")[1] ;

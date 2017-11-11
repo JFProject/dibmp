@@ -53,8 +53,10 @@
 								<td class="text-left">
 									<a  href="<%=GOODS_EDIT_URL %>?gid=${goods.gid}" class="btn btn-primary btn-xs">
 											<span class="glyphicon glyphicon-edit"></span>&nbsp;编辑</a>
-									<button class="btn btn-danger btn-xs" id="out-${goods.gid }">
-											<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;待出库</button>
+								</td>
+								<td ${flag }="" class="text-left" >
+								<button class="btn btn-danger btn-xs" id="out-${goods.gid }">
+											<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;添加商品</button>
 								</td>
 							</tr>
 						</c:forEach>

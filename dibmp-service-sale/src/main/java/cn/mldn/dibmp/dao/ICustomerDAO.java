@@ -9,6 +9,7 @@ import cn.mldn.dibmp.vo.Critem;
 import cn.mldn.dibmp.vo.Csource;
 import cn.mldn.dibmp.vo.Customer;
 import cn.mldn.dibmp.vo.CustomerRecord;
+import cn.mldn.dibmp.vo.Goods;
 import cn.mldn.dibmp.vo.Province;
 
 public interface ICustomerDAO { 
@@ -41,4 +42,6 @@ public interface ICustomerDAO {
 	public Integer getCrNum(String cmid);
 	public List<CustomerRecord> findAllCustomerRecord(Long cmid);  
 	public String findPhoneByMid(String mid);
+	public Customer findById(Long cuid);
+	public Goods findByGid(Long gid);
 }

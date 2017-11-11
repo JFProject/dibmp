@@ -36,7 +36,7 @@ public interface IGoodsServiceBack {
 	 * 2、key = "allRecorders", value表示所有的记录数
 	 * 3、key = "memberName", value表示记录者姓名
 	 */
-	public Map<String,Object> list(long currentPage,int lineSize,String column,String keyWord) ;
+	public Map<String,Object> list(long currentPage,int lineSize,String column,String keyWord,String mid) ;
 	/**
 	 * 编辑前的回显操作
 	 * @param gid 商品编号

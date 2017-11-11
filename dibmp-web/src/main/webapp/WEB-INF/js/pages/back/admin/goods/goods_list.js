@@ -1,8 +1,12 @@
 $(function(){
 	$("button[id^=out-]").each(function(){
 		$(this).on("click",function(){
-			cid = this.id.split("-")[1] ;
-			operateAlert(true,"待出库商品添加成功！","待出库商品添加失败！") ;
+			gid = this.id.split("-")[1] ;
+			console.log("部门编号：" + gid) ;
+			$.post("pages/back/admin/goods/add_customer.action",{"gid":gid},function(data){
+				operateAlert(data,"待出库商品添加成功！","待出库商品添加失败！") ;
+			},"json") ;
+			
 		}) ;
 	}) ;
 	/*$("span[id^=storage-]").each(function(){

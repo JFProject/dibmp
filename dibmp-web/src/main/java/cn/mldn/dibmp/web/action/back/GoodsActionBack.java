@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import cn.mldn.dibmp.service.IDistributionServiceBack;
 import cn.mldn.dibmp.service.IGoodsServiceBack;
 import cn.mldn.dibmp.vo.Goods;
 import cn.mldn.fastdfs.util.FastDFSUtil;
@@ -21,7 +22,15 @@ import cn.mldn.util.web.SplitPageUtil;
 public class GoodsActionBack extends AbstractAction {
 	@Resource
 	private IGoodsServiceBack goodsService ;
+	
+	
+	@Resource
+	private IDistributionServiceBack distributionService ;	
+	
 	private static final String TITLE = "商品" ;
+	
+	
+	
 	@RequestMapping("add_pre")
 	public ModelAndView addPre() {
 		ModelAndView mav = new ModelAndView(super.getPage("goods.add.page"));
@@ -84,7 +93,8 @@ public class GoodsActionBack extends AbstractAction {
 	public ModelAndView list() {
 		SplitPageUtil spu = new SplitPageUtil("商品编号:gid|商品名称:name", super.getPage("goods.list.action")) ;
 		ModelAndView mav = new ModelAndView(super.getPage("goods.list.page"));
-		mav.addAllObjects(this.goodsService.list(spu.getCurrentPage(), spu.getLineSize(), spu.getColumn(), spu.getKeyWord())) ;
+		String mid = (String)super.getRequest().getSession().getAttribute("mid");
+		mav.addAllObjects(this.goodsService.list(spu.getCurrentPage(), spu.getLineSize(), spu.getColumn(), spu.getKeyWord(),mid)) ;
 		return mav;
 	}
 	@RequestMapping("getSubtypeByWiid")
@@ -96,6 +106,12 @@ public class GoodsActionBack extends AbstractAction {
 	@ResponseBody
 	public Object goodsStorageInfo(long gid) {
 		return this.goodsService.goodsStorageInfo(gid) ;
+	}
+	@RequestMapping("add_customer")
+	@ResponseBody
+	public boolean add_customer(Long gid) {
+		String mid = (String)super.getRequest().getSession().getAttribute("mid");
+		return this.distributionService.add(mid, gid) ;
 	}
 	
 }
