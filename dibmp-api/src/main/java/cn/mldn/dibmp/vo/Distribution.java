@@ -12,6 +12,27 @@ public class Distribution implements Serializable {
 	private Double price;
 	private Integer status;
 	private String note;
+	private Long appmid;
+	private Long cuid;
+	private Long outmid;
+	public Long getAppmid() {
+		return appmid;
+	}
+	public void setAppmid(Long appmid) {
+		this.appmid = appmid;
+	}
+	public Long getCuid() {
+		return cuid;
+	}
+	public void setCuid(Long cuid) {
+		this.cuid = cuid;
+	}
+	public Long getOutmid() {
+		return outmid;
+	}
+	public void setOutmid(Long outmid) {
+		this.outmid = outmid;
+	}
 	public Long getDsid() {
 		return dsid;
 	}
@@ -59,10 +80,5 @@ public class Distribution implements Serializable {
 	}
 	public void setNote(String note) {
 		this.note = note;
-	}
-	@Override
-	public String toString() {
-		return "Distribution [dsid=" + dsid + ", title=" + title + ", pid=" + pid + ", cid=" + cid + ", gnum=" + gnum
-				+ ", price=" + price + ", status=" + status + ", note=" + note + "]";
 	}
 }
