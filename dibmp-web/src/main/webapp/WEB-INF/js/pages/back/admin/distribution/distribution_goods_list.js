@@ -10,14 +10,29 @@ $(function() {
 			var amount = parseInt($("#amount-" + gid).val()) ;	// 直接取得value属性
 			if (amount == 0) {
 				$("#goods-" + gid).remove() ;
+				$.post("pages/back/admin/distribution/remove.action",{"data":gid},function(data){
+					if(data){
+						operateAlert(true,"商品数量修改成功！","商品数量修改失败！") ;
+					}else{
+						operateAlert(false,"商品数量修改成功！","商品数量修改失败！") ;
+					}
+				},"json") ;
+			}else{
+				data = gid + ":" + amount ;
+				$.post("pages/back/admin/distribution/edit.action",{"data":data,"delGid":""},function(data){
+					if(data){
+						operateAlert(true,"商品数量修改成功！","商品数量修改失败！") ;
+					}else{
+						operateAlert(false,"商品数量修改成功！","商品数量修改失败！") ;
+					}
+				},"json") ;
 			}
-			operateAlert(true,"商品数量修改成功！","商品数量修改失败！") ;
 		}) ;
 	}) ;  
 	// 实现整体修改操作的功能
 	$(editBtn).on("click",function(){
 		// 定义一个数组，保存所有需要被删除的gid数据
-		var delGid = new Array() ;
+		var delGid = "" ;
 		var foot = 0 ;
 		var data = "" ; // 实现最终数据拼凑的字符串
 		$("[id*=amount-]").each(function(){
@@ -26,11 +41,23 @@ $(function() {
 			if (amount != "0") {
 				data += gid + ":" + amount + "|" ;
 			} else {
-				delGid[foot ++] = gid ;
+				delGid += gid + "," ; ;
 			}
 		}) ;
 		// 进行ajax异步数据处理操作
-		operateAlert(true,"商品数量修改成功！","商品数量修改失败！") ;
+		$.post("pages/back/admin/distribution/edit.action",{"data":data,"delGid":delGid},function(data){
+			if(data){
+				if(delGid != ""){
+					gids = delGid.split(",") ;
+					for(var i = 0 ; i < gids.length ; i++){
+						$("#goods-" + gids[i]).remove() ;
+					}
+				}	
+				operateAlert(true,"商品数量修改成功！","商品数量修改失败！") ;
+			}else{
+				operateAlert(false,"商品数量修改成功！","商品数量修改失败！") ;
+			}
+		},"json") ;
 	}) ;
 	$("#rmBtn").on("click",function(){	// 绑定用户锁定操作
 		var data = "" ;
@@ -40,10 +67,16 @@ $(function() {
 			}
 		}) ;
 		if (data != "") {
-			$(":checked").each(function() {
-				$("#goods-" + this.value).remove() ;
-			});
-			operateAlert(true,"商品信息移除成功！","商品信息移除失败！") ;
+			$.post("pages/back/admin/distribution/remove.action",{"data":data},function(data){
+				if(data){
+					$(":checked").each(function() {
+						$("#goods-" + this.value).remove() ;
+					});
+					operateAlert(true,"商品信息移除成功！","商品信息移除失败！") ;
+				}else{
+					operateAlert(false,"商品信息移除成功！","商品信息移除失败！") ;
+				}
+			},"json") ;
 		} else {
 			operateAlert(false,"","请先选择要移除的商品信息。") ;
 		}

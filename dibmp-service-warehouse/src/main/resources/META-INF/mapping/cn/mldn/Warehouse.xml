@@ -3,8 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.mldn.dibmp.dao.IWaerhousDAO">
 	<insert id="doCreate" parameterType="Warehouse" >
-		INSERT INTO warehouse(name,pid,cid,wiid,address,area,maximum,photo,note)
-		VALUES (#{name},#{pid},#{cid},#{wiid},#{address},#{area},#{maximum},#{photo},#{note}) ;
+		INSERT INTO warehouse(name,pid,cid,wiid,address,area,maximum,currnum,photo,note)
+		VALUES (#{name},#{pid},#{cid},#{wiid},#{address},#{area},#{maximum},#{currnum},#{photo},#{note}) ;
 	</insert>
 	<update id="doUpdate" parameterType="Warehouse" >
 		update warehouse 

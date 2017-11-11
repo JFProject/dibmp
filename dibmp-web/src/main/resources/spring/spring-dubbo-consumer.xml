@@ -29,4 +29,6 @@
 		interface="cn.mldn.dibmp.service.ICustomerServiceBack" version="${dubbo.interface.version}" />
 	<dubbo:reference id="distributionInstance"
 		interface="cn.mldn.dibmp.service.IDistributionServiceBack" version="${dubbo.interface.version}" />
+	<dubbo:reference id="outputStorageInstance"
+		interface="cn.mldn.dibmp.service.IOutputStorageServiceBack" version="${dubbo.interface.version}" />
 </beans>

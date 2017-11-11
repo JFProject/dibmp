@@ -22,9 +22,7 @@
 	public static final String GOODS_LIST_URL = "pages/back/admin/goods/list.action" ;
 	
 	public static final String DISTRIBUTION_GOODS_LIST_URL = "pages/back/admin/distribution/goods_list.action" ;
-	public static final String DISTRIBUTION_LIST_URL = "pages/back/admin/distribution/list_myself.action" ;
-	public static final String DISTRIBUTION_CLEAR_URL = "pages/back/admin/distribution/clear.action" ;
-	
+	public static final String DISTRIBUTION_LIST_URL = "pages/back/admin/outputstorage/list_myself.action" ;
 	
 	public static final String MANAGE_STORAGE_INPUT_URL = "pages/back/admin/manage/storage_input_pre.action" ;
 	public static final String MANAGE_DISTRIBUTION_INPUT_URL = "pages/back/admin/manage/distribution_input_pre.action" ;
@@ -115,8 +113,6 @@
 								class="fa fa-edit"></i> 待出库商品</a></li>
 							<li class="${param.msi==72 ? 'active' : ''}"><a href="<%=DISTRIBUTION_LIST_URL%>"><i
 								class="fa fa-fax"></i> 我的出库申请</a></li>
-							<li class="${param.msi==73 ? 'active' : ''}"><a href="<%=DISTRIBUTION_CLEAR_URL%>"><i
-								class="glyphicon glyphicon-trash"></i> 取消出库申请</a></li>
 					</ul></li>
 				</shiro:hasRole>
 				<shiro:hasRole name="manage">	

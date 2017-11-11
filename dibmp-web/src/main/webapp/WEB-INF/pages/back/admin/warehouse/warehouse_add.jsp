@@ -82,9 +82,9 @@
 								<!-- 定义表单错误提示显示元素 -->
 								<div class="col-md-4" id="areaMsg"></div>
 							</div>
-							<div class="form-group" id="iidDiv">
+							<div class="form-group" id="wiidDiv">
 								<!-- 定义表单提示文字 -->
-								<label class="col-md-3 control-label" for="iid">仓库用途：</label>
+								<label class="col-md-3 control-label" for="wiid">仓库用途：</label>
 								<div class="col-md-5">
 									<select id="wiid" name="wiid" class="form-control">
 										<option value="">====== 请选择库存商品类型 ======</option>
@@ -94,7 +94,7 @@
 									</select>
 								</div>
 								<!-- 定义表单错误提示显示元素 -->
-								<div class="col-md-4" id="iidMsg"></div>
+								<div class="col-md-4" id="wiidMsg"></div>
 							</div>
 							<div class="form-group" id="maximumDiv">
 								<!-- 定义表单提示文字 -->

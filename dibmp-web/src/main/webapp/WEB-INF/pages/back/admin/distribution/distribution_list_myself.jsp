@@ -9,6 +9,7 @@
 	public static final String DISTRIBUTION_EDIT_URL = "pages/back/admin/distribution/edit_pre.action" ;
 	public static final String DISTRIBUTION_LIST_DETAILS_URL = "pages/back/admin/distribution/list_details.action" ;
 	public static final String DISTRIBUTION_DELETE_URL = "pages/back/admin/distribution/list_details.action" ;
+	public static final String DISTRIBUTION_CLEAR_URL = "pages/back/admin/outputstorage/clear.action" ;
 %>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -32,22 +33,45 @@
 					<thead>
 						<tr>
 							<th class="text-center" style="width:10%;">出库单编号 </th> 
-							<th class="text-left" style="width:50%;">申请标题</th> 
-							<th class="text-center" style="width:10%;">省份</th>
-							<th class="text-center" style="width:10%;">城市</th>
-							<th class="text-center" style="width:10%;">商品数量</th>
-							<th class="text-center" style="width:10%;">商品总价</th>
+							<th class="text-left" style="width:18%;">申请标题</th> 
+							<th class="text-center" style="width:8%;">省份</th>
+							<th class="text-center" style="width:8%;">城市</th>
+							<th class="text-center" style="width:8%;">商品数量</th>
+							<th class="text-center" style="width:8%;">商品总价</th>
+							<th class="text-center" style="width:8%;">客户姓名</th>
+							<th class="text-center" style="width:8%;">提交人员</th>
+							<th class="text-center" style="width:8%;">审核人员</th>
+							<th class="text-center" style="width:8%;">状态</th>
+							<th class="text-center" style="width:8%;">操作</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th class="text-center" style="width:10%;">20001010</th> 
-							<td class="text-left">2017双十一衣帽入库</td>
-							<td class="text-center">北京</td>
-							<td class="text-center">北京</td>
-							<td class="text-center">100</td>
-							<td class="text-center">1000.77</td>
-						</tr>
+						<c:forEach items="${allDistribution }" var="distribution">
+							<tr>
+								<th class="text-center" style="width:10%;">${distribution.dsid }</th> 
+								<td class="text-left">${distribution.title }</td>
+								<td class="text-center">${province[distribution.dsid].title }</td>
+								<td class="text-center">${city[distribution.dsid].title }</td>
+								<td class="text-center">${distribution.gnum }</td>
+								<td class="text-center">${distribution.price }</td>
+								<td class="text-center">${customer[distribution.dsid].name }</td>
+								<td class="text-center">${applyMember[distribution.dsid].name }</td>
+								<td class="text-center">${outMember[distribution.dsid].name }</td>
+								<c:if test="${distribution.status == 1}">
+									<td class="text-center"><span class="text-primary">待审核</span></td>
+								</c:if>
+								<c:if test="${distribution.status == 2}">
+									<td class="text-center"><span class="text-danger">未通过</span></td>
+								</c:if>
+								<c:if test="${distribution.status == 3}">
+									<td class="text-center"><span class="text-success">已完成</span></td>
+								</c:if>
+								<td class="text-center">
+									<a href="<%=DISTRIBUTION_CLEAR_URL %>?dsid=${distribution.dsid }" class="btn btn-danger btn-xs">
+										<span class="glyphicon glyphicon-share"></span>&nbsp;取消申请</a>
+								</td>
+							</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 				<div id="splitBarDiv" style="float:right">

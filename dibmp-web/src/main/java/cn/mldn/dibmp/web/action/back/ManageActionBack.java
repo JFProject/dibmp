@@ -23,7 +23,10 @@ public class ManageActionBack extends AbstractAction {
 	@RequestMapping("storage_input")
 	public ModelAndView storageInput(long said) {
 		ModelAndView mav = new ModelAndView(super.getPage("manage.storage.page"));
-		mav.addAllObjects(manageService.storageInput(said)) ;
+		if(this.manageService.storageInput(said) == null) {
+			return this.storageInputPre() ;
+		}
+		mav.addAllObjects(this.manageService.storageInput(said)) ;
 		return mav;
 	}
 	@RequestMapping("storage_audit")
@@ -51,8 +54,31 @@ public class ManageActionBack extends AbstractAction {
 		return mav;
 	}
 	@RequestMapping("distribution_input")
-	public ModelAndView distributionInput() {
+	public ModelAndView distributionInput(long dsid) {
 		ModelAndView mav = new ModelAndView(super.getPage("manage.distribution.page"));
+		if(this.manageService.distributionInput(dsid) == null) {
+			return this.distributionInputPre() ;
+		}
+		mav.addAllObjects(this.manageService.distributionInput(dsid)) ;
+		return mav;
+	}
+	@RequestMapping("distribution_audit")
+	public ModelAndView distributionAudit(int flag ,long dsid) {
+		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
+		String mid = (String)super.getRequest().getSession().getAttribute("mid") ;
+		if(flag == 1) { //库管审核通过
+			if(this.manageService.distributionSuccess(dsid, mid)) {
+				super.setMsgAndUrl(mav, "manage.distribution.action", "vo.add.success", TITLE);
+			}else {
+				super.setMsgAndUrl(mav, "manage.distribution.action", "vo.add.failure", TITLE);
+			}
+		}else {
+			if(this.manageService.distributionFailure(dsid,mid, 2)) {
+				super.setMsgAndUrl(mav, "manage.distribution.action", "vo.add.success", TITLE);
+			} else {
+				super.setMsgAndUrl(mav, "manage.distribution.action", "vo.add.failure", TITLE);
+			}
+		}
 		return mav;
 	}
 }

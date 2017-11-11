@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mldn.dibmp.dao.IOutputStorageDAO">
+	<select id="findSplitByMyself" parameterType="Map" resultType="Distribution">
+		select dsid,title,pid,cid,gnum,price,status,note,appmid,cuid,outmid 
+		from distribution where appmid=#{appmid} 
+		<if test="column !=null and keyWord !=null">
+			and ${column} like #{keyWord}
+		</if>
+		order by status limit #{start},#{lineSize}
+	</select>
+	<select id="getCountByMyself" parameterType="Map" resultType="long">
+		select count(*)
+		from distribution where appmid=#{appmid} 
+		<if test="column !=null and keyWord !=null">
+			and ${column} like #{keyWord}
+		</if>
+	</select>
+	<select id="findProvinceByPid" parameterType="long" resultType="Province">
+		select pid,title from province where pid=#{pid}
+	</select>
+	<select id="findCityByCid" parameterType="long" resultType="City">
+		select cid,pid,title from city where cid=#{cid}
+	</select>
+	<select id="findCustomerByCuid" parameterType="long" resultType="Customer">
+		select cuid,name,phone,pid,cid,address,indate,connum,ciid,csid,note,recorder from customer where cuid=#{cuid}
+	</select>
+	<select id="findMemberByMid" parameterType="String" resultType="Member"> 
+		select mid,lid,did,name,salary,phone,password,photo,note,hiredate,inmid,locked from member where mid=#{mid}
+	</select>
+	<delete id="doRemoveDistribution" parameterType="long">
+		delete from distribution where dsid=#{dsid}
+	</delete>
+</mapper>

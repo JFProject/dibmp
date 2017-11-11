@@ -24,7 +24,8 @@ $(function(){
 		},
 		errorClass : "text-danger",
 		rules : {
-			"sid" : {
+			"dsid" : {
+				digits:true ,
 				required : true
 			}
 		}

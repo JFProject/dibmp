@@ -80,7 +80,7 @@ public class DistributionBackImpl extends AbstractService implements IDistributi
 		Double prive = 0.0;
 		Integer sum = 0;
 		String cuid = String.valueOf(this.redisTemplate.opsForValue().get(mid));
-		String cid = this.redisTemplate.opsForValue().get(mid).toString();
+		String cid = String.valueOf(this.redisTemplate.opsForValue().get(mid));
 		Set<Long> gids = SetToLong.ObjectValToLong(this.redisTemplate.opsForHash().keys(cid));
 		if(gids == null || gids.size() == 0){
 			return false;
@@ -90,10 +90,12 @@ public class DistributionBackImpl extends AbstractService implements IDistributi
 		while(it.hasNext()){
 			Long gid = it.next();
 			Goods gvo = this.CustomerDAO.findByGid(gid);
-			Integer count = (Integer)this.redisTemplate.opsForHash().get(cuid, String.valueOf(gid));
+			Integer count = Integer.parseInt(String.valueOf(this.redisTemplate.opsForHash().get(cuid, String.valueOf(gid))));
 			this.redisTemplate.opsForHash().delete(cuid, String.valueOf(gid));
 			prive = count * gvo.getPrice() + prive;
-			sum = sum + gvo.getStornum();
+			sum = sum + count;
+			gvo.setStornum(count);
+			gvo.setPrice(gvo.getPrice());
 			all.add(gvo);
 			this.redisTemplate.opsForHash().delete(cuid, String.valueOf(gid));
 		}
@@ -112,12 +114,42 @@ public class DistributionBackImpl extends AbstractService implements IDistributi
 				dvo.setGid(gtvo.getGid());
 				dvo.setName(gtvo.getName());
 				dvo.setNum(gtvo.getStornum());
-				dvo.setPrice(prive);
+				dvo.setPrice(gtvo.getPrice());
 				Long wid = this.distributionDAO.findWid(gtvo.getGid());
 				dvo.setWid(wid);
+				if(!this.distributionDAO.doCreateByDistributionDetails(dvo)) {
+					return false ;
+				}
 			}
-			this.redisTemplate.delete(mid);
-			return this.distributionDAO.doCreateByDistributionDetails(dvo);
+			return this.redisTemplate.delete(mid) ;
+		}
+		return true;
+	}
+	
+	@Override
+	public boolean edit(String data, String delGid,String mid) {
+		String[] temp = data.split("\\|") ;
+		String cuid = String.valueOf(this.redisTemplate.opsForValue().get(mid)) ;
+		for(int i = 0 ; i < temp.length; i ++) {
+			String attr = temp[i].split(":")[0] ;
+			String value = temp[i].split(":")[1] ;
+			this.redisTemplate.opsForHash().put(cuid, attr, value);
+		}
+		this.remove(delGid, mid) ;
+		return true;
+	}
+	
+	@Override
+	public boolean remove(String data,String mid) {
+		if(data == null || "".equals(data)) {
+			return false ;
+		}
+		String[] gids = data.split(",") ;
+		String cuid = String.valueOf(this.redisTemplate.opsForValue().get(mid)) ;
+		for(int i = 0 ; i < gids.length ; i ++) {
+			if(this.redisTemplate.opsForHash().delete(cuid, gids[i]) != 1) {
+				return false ;
+			}
 		}
 		return true;
 	}

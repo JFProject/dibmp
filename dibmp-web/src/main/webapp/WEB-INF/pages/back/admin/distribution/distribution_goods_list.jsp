@@ -68,7 +68,7 @@
 								<td class="text-center">
 									<input type="checkbox" id="gid" name="gid" value="${goods.gid }">
 								</td>
-								<td class="text-center"><img src="upload/goods/nophoto.png" style="width:30px;"></td>
+								<td class="text-center"><img src="${authPhoto[goods.gid] }" style="width:30px;"></td>
 								<td class="text-left">${goods.name }</td>
 								<td class="text-center"><span id="price-${goods.gid }">${goods.price }</span></td>
 								<td class="text-center">${goods.stornum }</td>
@@ -87,6 +87,7 @@
 					总价￥<span id="allPrice" class="text-danger h2">78.9</span>
 				</div>
 				<div>
+					<button class="btn btn-primary" id="editBtn"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改数量</button>
 					<button class="btn btn-danger" id="rmBtn"><span class="glyphicon glyphicon-remove"></span>&nbsp;移出清单</button>
 					<a class="btn btn-success" href="<%=DISTRIBUTION_ADD_URL%>" id="createBtn"><span class="glyphicon glyphicon-file"></span>&nbsp;创建出库申请单</a>
 				</div>

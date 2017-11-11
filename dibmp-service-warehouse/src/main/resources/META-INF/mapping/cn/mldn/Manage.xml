@@ -43,4 +43,37 @@
 	<update id="doEditWarehouseByWid" parameterType="warehouse">
 		update warehouse set currnum=#{currnum} where wid=#{wid}
 	</update>
+	<select id="findDistributionByDsid" parameterType="long" resultType="Distribution">
+		select dsid,title,pid,cid,gnum,price,status,note,appmid,cuid,outmid from distribution where dsid=#{dsid}
+	</select>
+	<select id="findDistributionDetailsByDsid" parameterType="long" resultType="DistributionDetails">
+		select dsdid,dsid,gid,name,num,price,wid from distribution_details where dsid=#{dsid}
+	</select>
+	<select id="findCustomerByCuid" parameterType="long" resultType="Customer">
+		select cuid,name,phone,pid,cid,address,indate,connum,ciid,csid,note,recorder from customer where cuid=#{cuid}
+	</select>
+	<update id="doEditDistributionStatus" parameterType="Map">
+		update distribution set status=#{status},outmid=#{outmid} where dsid=#{dsid}
+	</update>
+	<select id="findWarehouseGoodsByWidAndGid" parameterType="Map" resultType="WarehouseGoods">
+		select wgid,wid,gid,num from warehouse_goods where wid=#{wid} and gid=#{gid}
+	</select>
+	<insert id="doCreateWarehouseGoods" parameterType="WarehouseGoods">
+		insert into warehouse_goods(wid,gid,num) values (#{wid},#{gid},#{num}) ;
+	</insert>
+	<update id="doEditWarehouseGoods" parameterType="Map">
+		update warehouse_goods set num=#{num} where wgid=#{wgid} ;
+	</update>
+	<update id="doEditGoodsStornumByGid" parameterType="Goods">
+		update goods set stornum=#{stornum} where gid=#{gid} ;
+	</update>
+	<select id="findGoodsStornumByGid" parameterType="long" resultType="int">
+		select stornum from goods where gid=#{gid}
+	</select>
+	<select id="findWarehouseCurrnumByWid" parameterType="long" resultType="int">
+		select currnum from warehouse where wid=#{wid}
+	</select>
+	<update id="doEditWarehouseStornumByWid" parameterType="Warehouse">
+		update warehouse set currnum=#{currnum} where wid=#{wid} ;
+	</update>
 </mapper>

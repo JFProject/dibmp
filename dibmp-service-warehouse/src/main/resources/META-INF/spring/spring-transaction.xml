@@ -25,6 +25,7 @@
 			<tx:method name="remove*" propagation="REQUIRED"/>	<!-- 设置了事务传播属性 -->
 			<tx:method name="delete*" propagation="REQUIRED"/>	<!-- 设置了事务传播属性 -->
 			<tx:method name="storage*" propagation="REQUIRED"/>	<!-- 设置了事务传播属性 -->
+			<tx:method name="distribution*" propagation="REQUIRED"/>	<!-- 设置了事务传播属性 -->
 			<tx:method name="get*" propagation="REQUIRED" read-only="true"/>
 			<tx:method name="list*" propagation="REQUIRED" read-only="true"/>
 		</tx:attributes>

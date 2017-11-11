@@ -68,7 +68,7 @@
 					<div style="text-align:center;color:red;text-size:20px">审核未通过</div>
 				</c:if>
 				<c:if test="${storageApply.status == 4}">
-					<div style="text-align:center;color:red;text-size:20px">订单已完成</div>
+					<div style="text-align:center;color:green;text-size:20px">订单已完成</div>
 				</c:if>
 				<div>&nbsp;</div>
 				<div>

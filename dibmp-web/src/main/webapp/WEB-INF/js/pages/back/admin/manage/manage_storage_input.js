@@ -24,7 +24,8 @@ $(function(){
 		},
 		errorClass : "text-danger",
 		rules : {
-			"sid" : {
+			"said" : {
+				digits:true ,
 				required : true
 			}
 		}

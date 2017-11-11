@@ -52,7 +52,7 @@ $(function(){
 			"address" : {
 				required : true 
 			},
-			"iid" : {
+			"wiid" : {
 				required : true 
 			},
 			"area" : {
