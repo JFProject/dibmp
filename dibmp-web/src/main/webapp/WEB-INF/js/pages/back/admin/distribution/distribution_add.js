@@ -38,4 +38,19 @@ $(function(){
 			}
 		}
 	});
+	
+	$(pid).on("change",function(){
+		if (this.value != "") {	// 有内容，需要进行ajax异步加载
+			$.post("pages/back/admin/warehouse/getCity.action",{"pid":this.value},
+					function(data){
+				$("#cid option:gt(0)").remove() ;
+				for (x = 0 ; x < data.allCity.length ; x ++) {
+					$("#cid").append("<option value='"+data.allCity[x].cid+"'>"+data.allCity[x].title+"</option>") ;
+				}
+			},"json") ;
+		} else {
+			$("#cid").remove() ;
+			$("#cid").append("<option value=''>====== 请选择所在城市 ======</option>") ;
+		}
+	}) ;
 })

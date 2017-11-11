@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.mldn.dibmp.dao.IDistributionDAO">
+	
+	<select id="findMaxId" resultType="Long">
+		SELECT max(dsid) FROM distribution ;
+	</select>
+	<insert id="doCreate" parameterType="Distribution" >
+		insert into distribution(title,gnum,pid,cid,price,status,note,cuid,appmid)
+ 			values(#{title},#{gnum},#{pid},#{cid},#{price},#{status},#{note},#{cuid},#{appmid});
+	</insert>
+	<select id="findWid" resultType="Long" parameterType="Long" >
+		select wid from warehouse_goods where num=(SELECT max(num) FROM warehouse_goods where gid=#{gid}) and gid = #{gid};
+	</select>
+	<insert id="doCreateByDistributionDetails" parameterType="DistributionDetails" >
+		insert into distribution_details(dsid,gid,name,num,price,wid)
+ 			values(#{dsid},#{gid},#{name},#{num},#{price},#{wid});
+	</insert>
+</mapper>

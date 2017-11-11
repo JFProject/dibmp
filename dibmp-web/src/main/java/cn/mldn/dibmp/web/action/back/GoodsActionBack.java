@@ -111,7 +111,7 @@ public class GoodsActionBack extends AbstractAction {
 	@ResponseBody
 	public boolean add_customer(Long gid) {
 		String mid = (String)super.getRequest().getSession().getAttribute("mid");
-		return this.distributionService.add(mid, gid) ;
+		return this.distributionService.adds(mid, gid) ;
 	}
 	
 }

@@ -77,7 +77,7 @@
 									<input type="text" id="amount-${goods.gid }" name="amount-${goods.gid }" class="shopcar-form-control" size="4" maxlength="4" value="${allCount[goods.gid] }">
 									<button class="btn btn-primary" id="add-${goods.gid }">+</button> 
 								</td>
-								<td class="text-center"><button class="btn btn-primary" id="updateBtn-1">修改</button></td>
+								<td class="text-center"><button class="btn btn-primary" id="updateBtn-${goods.gid }">修改</button></td>
 							</tr>
 							</c:forEach>
 						</tbody>
@@ -97,10 +97,10 @@
 			</div>			
 		</c:if>
 		<c:if test="${Customer ==null}" >
-			<a href="<%=CUSTOMER_LIST_URL%>"><button class="btn btn-danger" >
+			<div align="center" ><a href="<%=CUSTOMER_LIST_URL%>"><button class="btn btn-danger" >
 			<span class="glyphicon glyphicon-pencil"></span>&nbsp;去寻找客户</button>
 			</a>
-					
+			</div>		
 		</c:if>
 		</div>
 		<!-- 导入公司尾部认证信息 -->

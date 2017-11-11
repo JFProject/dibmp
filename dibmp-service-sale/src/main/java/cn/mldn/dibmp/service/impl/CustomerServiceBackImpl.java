@@ -90,9 +90,6 @@ public class CustomerServiceBackImpl extends AbstractService implements ICustome
 		map.put("allRecorderName", recorderName) ;
 		map.put("allRecorders", this.CustomerDAO.getSplitCount(super.paramToMap(column, keyWord))) ;
 		map.put("allCustomerItemTitles", citemMap);
-		
-		System.err.println(this.redisTemplate.opsForValue().get(mid));
-		
 		if(this.redisTemplate.opsForValue().get(mid) == null){//没有绑定客户
 			map.put("flag", "id");//显示按钮标签
 		}else{

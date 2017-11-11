@@ -6,31 +6,47 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import cn.mldn.dibmp.service.ICustomerServiceBack;
 import cn.mldn.dibmp.service.IDistributionServiceBack;
+import cn.mldn.dibmp.service.IWarehouseServiceBack;
+import cn.mldn.dibmp.vo.Distribution;
 import cn.mldn.util.action.abs.AbstractAction;
 import cn.mldn.util.web.SplitPageUtil;
 
 @Controller
 @RequestMapping("/pages/back/admin/distribution/*")
 public class DistributionActionBack extends AbstractAction {
-	private static final String TITLE = "商品追加" ;
+	private static final String TITLE = "客户订单" ;
 	
 	@Resource
 	private IDistributionServiceBack distributionService ;
-	
+	@Resource
+	private IWarehouseServiceBack iw ;
 	
 	
 	@RequestMapping("goods_list") 
 	public ModelAndView listGoods() {
 		ModelAndView mav = new ModelAndView(super.getPage("distribution.goods.list.page"));
 		String mid = (String)super.getRequest().getSession().getAttribute("mid");
-		mav.addAllObjects(this.distributionService.getCustomer(mid));
+		mav.addAllObjects(this.distributionService.getCustomers(mid));
 		return mav;
 	}
 	@RequestMapping("add_pre") 
 	public ModelAndView addPre() {
 		ModelAndView mav = new ModelAndView(super.getPage("distribution.add.page"));
+		mav.addAllObjects(this.iw.addPro());
+		return mav;
+	}
+	@RequestMapping("add") 
+	public ModelAndView add(Distribution vo) {
+		ModelAndView mav = new ModelAndView(super.getPage("forward.page"));
+		mav.addAllObjects(this.iw.addPro());
+		super.setMsgAndUrl(mav, "warehouse.add.action", "vo.add.success", TITLE);
+		String mid = (String)super.getRequest().getSession().getAttribute("mid");
+		if(this.distributionService.indentAdd(mid,vo)) {
+			super.setMsgAndUrl(mav, "distribution.list.action", "vo.add.success", TITLE);
+		}else {
+			super.setMsgAndUrl(mav, "distribution.list.action", "vo.add.failure", TITLE);
+		}
 		return mav;
 	}
 	@RequestMapping("list_myself") 

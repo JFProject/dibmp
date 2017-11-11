@@ -7,6 +7,9 @@ import java.util.Set;
 public class SetToLong {
 	public static Set<Long> ObjectValToLong(Set<Object> set){
 		Set<Long> all = new HashSet<>();
+		if(set == null || set.size() == 0){
+			return null;
+		}
 		Iterator<Object> it = set.iterator();
 		while(it.hasNext()){
 			all.add(Long.parseLong(it.next().toString()));
