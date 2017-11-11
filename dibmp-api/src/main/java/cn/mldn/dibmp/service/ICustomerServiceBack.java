@@ -26,11 +26,12 @@ public interface ICustomerServiceBack {
 	public List<City> getCityTitle(Long pid);
 	public boolean add(Customer vo);
 	public List<Customer> getAllCustomer();
-	public Map<String, Object> list(long currentPage, int lineSize, String column, String keyWord);
+	public Map<String, Object> list(long currentPage, int lineSize, String column, String keyWord,String mid);
 	public List<Critem> getAllCritem();
 	public boolean addCr(CustomerRecord vo);
 	public Integer getCrNum(String cmid);
 	public boolean editConnum(Long cuid);
 	public List<CustomerRecord> getAllCustomerRecord(Long cmid);
 	public String getPhomeByMid(String mid);
+	public boolean band(Long cid,String mid);
 }

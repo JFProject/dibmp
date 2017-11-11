@@ -3,7 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="/WEB-INF/pages/plugins/back/back_header.jsp"/>
-
+<%!
+	public static final String CUSTOMER_BAND_URL = "pages/back/admin/customer/band.action" ;
+%>
 <script type="text/javascript" src="js/pages/back/admin/customer/customer_list.js"></script>
 <script type="text/javascript" src="js/split_page.js"></script>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -47,11 +49,13 @@
 							<td class="text-left"><fmt:formatDate value="${customer.indate}" /></td>  
 							<td class="text-center">${customer.connum}</td>
 							<td class="text-center"><span id="mid-${customer.recorder}" style="cursor:pointer;">${allRecorderName[customer.cuid]}</span></td> 
-							<td class="text-left">
+							<td class="text-left" >
 								<button class="btn btn-primary btn-xs" id="input-${customer.cuid}">
 										<span class="glyphicon glyphicon-floppy-save"></span>&nbsp;追加记录</button>
-								<button class="btn btn-danger btn-xs" id="out-1">
-										<span class="glyphicon glyphicon-log-out"></span>&nbsp;商品出库</button>
+							</td>
+							<td ${flag }="" class="text-left" >
+								<a href="<%=CUSTOMER_BAND_URL%>?cid=${customer.cuid}"><button class="btn btn-danger btn-xs" id="out-${customer.cuid}">
+										<span class="glyphicon glyphicon-log-out"></span>&nbsp;添加订单</button></a>
 							</td>
 						</tr>
 						</c:forEach>

@@ -49,7 +49,7 @@ public class GoodsServiceBackImpl extends AbstractService implements IGoodsServi
 	}
 	
 	@Override
-	public Map<String, Object> list(long currentPage, int lineSize, String column, String keyWord) {
+	public Map<String, Object> list(long currentPage, int lineSize, String column, String keyWord,String mid) {
 		Map<String,Object> map = new HashMap<String,Object>() ;
 		Map<String,String> memberName = new HashMap<String,String>() ;
 		List<Goods> allGoods = this.goodsDAO.findSplitOrderByGid(super.paramToMap(currentPage, lineSize, column, keyWord)) ;
@@ -61,6 +61,11 @@ public class GoodsServiceBackImpl extends AbstractService implements IGoodsServi
 		map.put("allGoods", allGoods) ;
 		map.put("allRecorders", this.goodsDAO.getSplitCount(super.paramToMap(column, keyWord))) ;
 		map.put("memberName", memberName) ;
+		if(this.redisTemplate.opsForValue().get(mid) != null){//没有绑定客户
+			map.put("flag", "id");//显示按钮标签
+		}else{
+			map.put("flag", "hidden");//不现实按钮
+		}
 		return map ;
 	}
 	
