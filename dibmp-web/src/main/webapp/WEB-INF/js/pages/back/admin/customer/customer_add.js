@@ -72,6 +72,7 @@ $(function(){
 	$(pid).on("change",function(){
 		pid = $(this).val() ;
 		if(pid != ""){
+			alert("123");
 			$.post("pages/back/admin/customer/getCity.action",{"pid":pid},function(data){
 				$("#cid").empty() ;
 				console.log(data);

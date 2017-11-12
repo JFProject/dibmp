@@ -78,8 +78,8 @@ public class CustomerActionBack extends AbstractAction {
 		return mav;
 	}
 	@RequestMapping("getCity")
+	@ResponseBody
 	public Object getAllCity(long pid) {
-		System.err.println();
 		return customerService.getCityTitle(pid);
 		
 	}
